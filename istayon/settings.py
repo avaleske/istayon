@@ -75,9 +75,8 @@ STATICFILES_DIRS = (
 )
 
 assert 'SECRET_KEY' in os.environ, 'Set SECRET_KEY in your .env file!'
-DEFAULT_SECRET_KEY = 'ask2lu0ujoijjw`jAJKLSDsadflsk241254)(GIJQ)#{IRASKLSFJ'
-SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
-TEMPLATE_DEBUG = os.environ.get('DEBUG', False)
+DEBUG = bool(os.environ.get('DEBUG', False))
+TEMPLATE_DEBUG = bool(os.environ.get('DEBUG', False))
