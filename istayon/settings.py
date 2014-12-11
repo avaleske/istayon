@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apipoll',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,3 +81,10 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', False))
 TEMPLATE_DEBUG = bool(os.environ.get('DEBUG', False))
+
+#Tumblr
+
+assert 'TUMBLR_API_KEY' in os.environ, 'Set TUMBLR_API_KEY in your .env file!'
+TUMBLR_API_KEY = os.environ['TUMBLR_API_KEY']
+
+TAYLOR_BLOG_URL = 'taylorswift.tumblr.com'
