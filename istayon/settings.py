@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DATABASES = {
@@ -35,7 +37,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -55,7 +56,6 @@ USE_L10N = True
 USE_TZ = True
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -74,9 +74,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+assert 'SECRET_KEY' in os.environ, 'Set SECRET_KEY in your .env file!'
 DEFAULT_SECRET_KEY = 'ask2lu0ujoijjw`jAJKLSDsadflsk241254)(GIJQ)#{IRASKLSFJ'
 SECRET_KEY = os.environ.get('SECRET_KEY', DEFAULT_SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', True)
-TEMPLATE_DEBUG = os.environ.get('DEBUG', True)
+DEBUG = os.environ.get('DEBUG', False)
+TEMPLATE_DEBUG = os.environ.get('DEBUG', False)
