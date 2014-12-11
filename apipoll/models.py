@@ -12,3 +12,4 @@ class BlogEvent(models.Model):
     post_datetime = models.DateTimeField()
     liked_datetime = models.DateTimeField()
     post_url = models.URLField()
+    post_id = models.BigIntegerField()
