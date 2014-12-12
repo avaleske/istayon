@@ -4,3 +4,5 @@ staticfiles
 .env
 .idea/
 *~
+istayon.sublime-project
+istayon.sublime-workspace
