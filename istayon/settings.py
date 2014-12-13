@@ -108,3 +108,7 @@ assert 'TUMBLR_API_KEY' in os.environ, 'Set TUMBLR_API_KEY in your .env file!'
 TUMBLR_API_KEY = os.environ['TUMBLR_API_KEY']
 
 TAYLOR_BLOG_URL = 'taylorswift.tumblr.com'
+
+#cache keys
+LIKED_COUNT_KEY = 'liked_count'
+LIKED_INFO_KEY = 'liked_info'
