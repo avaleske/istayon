@@ -15,12 +15,12 @@ format_string = u"{0} {1}{2}"
 #todo do this with a template and divs and pretty
 def index(request):
     info = get_liked_info()
-    if info['five'] > 1 and info['ten'] > 0:
+    if info['five'] > 0 and info['ten'] > 1:
         out = format_string.format(phrases.get_yes(), phrases.get_name(), phrases.get_yes_end())
-    elif info['five'] >= 0 and info ['ten'] >= 0 and info['sixty'] > 0:
+    elif info['five'] == 0 and info ['ten'] > 0:
         out = format_string.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_end())
     else:
-        out = format_string.format(phrases.get_no(), phrases.get_name(), phrases.get_no())
+        out = format_string.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
 
     out += u"<br /><br />"
     out += u"It's been {0} since she liked something, for a total of {1} likes".format(
