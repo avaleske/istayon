@@ -3,6 +3,7 @@ PyTumblr==0.0.6
 PyYAML==3.11
 dj-database-url==0.3.0
 dj-static==0.0.6
+django-bmemcached==0.2.2
 django-toolbelt==0.0.1
 gunicorn==19.1.1
 httplib2==0.9
@@ -10,6 +11,7 @@ httpretty==0.8.3
 newrelic==2.40.0.34
 oauth2==1.5.211
 psycopg2==2.5.4
+python-binary-memcached==0.24.3
 pytz==2014.10
 static3==0.5.1
 urllib3==1.7.1
