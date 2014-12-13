@@ -6,7 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.timesince import timesince
 from datetime import timedelta
-from apipoll.models import BlogInfo, Like, Post
+from apipoll.models import BlogInfo, Like, Post, refresh_like_data
 from apipoll import phrases
 
 
@@ -26,6 +26,11 @@ def index(request):
     out += u"It's been {0} since she liked something, for a total of {1} likes".format(
         timesince(info['timestamp'], timezone.now()), get_liked_count())
     return HttpResponse(out)
+
+
+def reload_data(request):
+    refresh_like_data()
+    return HttpResponse("refreshed data")
 
 
 def get_liked_count():

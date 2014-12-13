@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', apipoll.views.index, name="index"),
+    url(r'^reload/$', apipoll.views.reload_data, name="reload"),
 )
