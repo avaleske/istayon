@@ -12,6 +12,9 @@ def get_name():
 def get_yes():
     return random.choice(yeses)
 
+def get_maybe():
+    return random.choice(maybes)
+
 
 def get_no():
     return random.choice(nos)
@@ -49,6 +52,12 @@ yeses = ["Yep!",
          "Yes!"
         ]
 
+maybes = ["Hmm...",
+          "Huh,",
+          "*shrugs*",
+          "idk."
+         ]
+
 nos = ["No,",
        "Sorry,",
        "Sad day!",
@@ -71,5 +80,6 @@ maybe_ends = [" might be online?",
               " might be here. It's hard to tell.",
               "'s here, maybe. She might've just gone offline.",
               " could be online. We can't really tell...",
-              " might be here, or might've just left. Give us a few minutes to see."
+              " might be here, or might've just left. Give us a few minutes to see.",
+              " might be online? It's hard to guess, tbh."
              ]
