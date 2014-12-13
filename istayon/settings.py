@@ -102,11 +102,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = bool(os.environ.get('DEBUG', False))
 TEMPLATE_DEBUG = bool(os.environ.get('DEBUG', False))
 
-# cron
-CRON_CLASSES = [
-    'apipoll.refresh_like_data',
-]
-
 #Tumblr
 
 assert 'TUMBLR_API_KEY' in os.environ, 'Set TUMBLR_API_KEY in your .env file!'
