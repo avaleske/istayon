@@ -9,6 +9,7 @@ gunicorn==19.1.1
 httplib2==0.9
 httpretty==0.8.3
 newrelic==2.40.0.34
+numpy==1.9.1
 oauth2==1.5.211
 psycopg2==2.5.4
 python-binary-memcached==0.24.3
