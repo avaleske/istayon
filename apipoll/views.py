@@ -24,22 +24,13 @@ def index(request):
 
     out += u"<br /><br />"
     out += u"It's been {0} since she liked something, for a total of {1} likes".format(
-        timesince(info['timestamp'], timezone.now()), get_liked_count())
+        timesince(info['timestamp'], timezone.now()), info['count'])
     return HttpResponse(out)
 
 
 def reload_data(request):
     refresh_like_data()
     return HttpResponse("refreshed data")
-
-
-def get_liked_count():
-    liked_count = cache.get(settings.LIKED_COUNT_KEY)
-    if not liked_count:
-        liked_count = int(BlogInfo.objects.get(key=settings.LIKED_COUNT_KEY).value)
-        # not expiring, since we clear it when we have more info
-        cache.set(settings.LIKED_COUNT_KEY, liked_count)
-    return liked_count
 
 
 def get_liked_info():
@@ -49,7 +40,13 @@ def get_liked_info():
         sixty = Like.objects.filter(liked_datetime__gte=timezone.now()-timedelta(minutes=60)).count()
         ten = Like.objects.filter(liked_datetime__gte=timezone.now()-timedelta(minutes=10)).count()
         five = Like.objects.filter(liked_datetime__gte=timezone.now()-timedelta(minutes=5)).count()
-        liked_info = {'url': l.post_url, 'timestamp': l.liked_datetime, 'five': five, 'ten': ten, 'sixty': sixty}
+        liked_info = {'url': l.post_url,
+                      'timestamp': l.liked_datetime,
+                      'five': five,
+                      'ten': ten,
+                      'sixty': sixty,
+                      'count': int(BlogInfo.objects.get(key=settings.LIKED_COUNT_KEY).value)
+        }
         # not expiring, since we clear it when we have more info
         cache.set(settings.LIKED_INFO_KEY, liked_info)
     return liked_info
