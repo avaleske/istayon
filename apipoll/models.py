@@ -7,11 +7,11 @@ from datetime import datetime
 from django.core.cache import cache
 import pytumblr
 
-
-def get_liked_count_from_api():
-    client = pytumblr.TumblrRestClient(settings.TUMBLR_API_KEY)
-    blog_info = client.blog_info(settings.TAYLOR_BLOG_URL)
-    return blog_info['blog']['likes']
+###
+# None of this is needed, since we can just store the results from the api in the cache. We don't really care
+# about keeping any of this around, so the db is just extra overhead. All this code is dead, and will be removed
+# shortly
+###
 
 
 def refresh_like_data(client=None):
