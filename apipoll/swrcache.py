@@ -1,3 +1,4 @@
+# stale-while-revalidating wrapper for the django cache
 # from https://djangosnippets.org/snippets/793/
 
 """Wrapper functions around Django's core cache to implement
