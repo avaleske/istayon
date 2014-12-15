@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.timesince import timesince
 from datetime import timedelta
 from apipoll import phrases, api, swrcache
+from httplib2 import ServerNotFoundError
 
 
 format_string = u"{0} {1}{2}"
@@ -17,7 +18,10 @@ def index(request):
 
     packed_values = swrcache.get(settings.LIKED_INFO_KEY)
     if not packed_values:
-        packed_values = api.get_like_data()
+        try:
+            packed_values = api.get_like_data()
+        except ServerNotFoundError:
+            return HttpResponse("Something went wrong and we couldn't connect to Tumblr.")
         swrcache.set(settings.LIKED_INFO_KEY, packed_values, 60)
     count, last_liked, histogram, bins = packed_values
 
@@ -25,7 +29,7 @@ def index(request):
         if histogram[0] > 0 and histogram[1] > 1:
             out = format_string.format(phrases.get_yes(), phrases.get_name(), phrases.get_yes_end())
         elif histogram[0] == 0 and histogram[1] > 0:
-            out = format_string.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_end())
+            out = format_string.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_down_end())
         else:
             out = format_string.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
     else:

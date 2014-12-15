@@ -4,82 +4,104 @@ import random
 # to format like "{yes|no} {name}{yes_end|maybe_end|no_end}"
 
 
-# todo bias these so the entertaining ones come up less often
 def get_name():
-    return random.choice(names)
+    return get_weighted_option(names)
 
 
 def get_yes():
-    return random.choice(yeses)
+    return get_weighted_option(yeses)
+
 
 def get_maybe():
-    return random.choice(maybes)
+    return get_weighted_option(maybes)
 
 
 def get_no():
-    return random.choice(nos)
+    return get_weighted_option(nos)
 
 
 def get_yes_end():
-    return random.choice(yes_ends)
+    return get_weighted_option(yes_ends)
 
 
 def get_no_end():
-    return random.choice(no_ends)
+    return get_weighted_option(no_ends)
 
 
-def get_maybe_end():
-    return random.choice(maybe_ends)
+def get_maybe_up_end():
+    return get_weighted_option(maybe_up_ends)
 
 
-names = ["Taylor Swift",
-         "Bae",
-         "Mom",
-         "T-Swift",
-         "Taylor",
-         "Tay",
-         "Becky",
-         "Tay Tay",
-         "T-Swizzle",
-         u"\U0001F385"
-         ]
+def get_maybe_down_end():
+    return get_weighted_option(maybe_down_ends)
 
-yeses = ["Yep!",
-         "Yep,"
-         "YAAS,",
-         "Everything's shiny, Cap'n,",
-         "*nods*,",
-         "Yes!"
-        ]
 
-maybes = ["Hmm...",
-          "Huh,",
-          "*shrugs*",
-          "idk."
-         ]
+# if weights are 5, 4, 3, 4, 1, then the weight space looks like
+# |     |    |   |    | |
+# with the likelihood of the random int falling in the range dependent on the size
+# so get rand int, and subtract range sizes until we're at or below zero.
+# weighted random from dictionary, where values are weights
+def get_weighted_option(phrase_dict):
+    total = sum(phrase_dict.values())
+    r = random.randint(1, total)
+    for phrase, weight in maybes.iteritems():
+        r -= weight
+        if r <= 0:
+            return phrase
 
-nos = ["No,",
-       "Sorry,",
-       "Sad day!",
-       ":( "
-       ]
+names = {"Taylor Swift": 6,
+         "Bae": 5,
+         "Mom": 5,
+         "T-Swift": 3,
+         "Taylor": 7,
+         "Tay": 5,
+         "Becky": 5,
+         "Tay Tay": 2,
+         "T-Swizzle": 3,
+         u"\U0001F385": 3
+         }
 
-yes_ends = [" is online!",
-            " is online, go reblog everything!",
-            " is liking stuff!",
-            "'s online.",
-            "'s hanging out with us!"
-            ]
+yeses = {"Yep!": 4,
+         "Yep,": 5,
+         "YAAS,": 3,
+         "Everything's shiny, Cap'n,": 1,
+         "*nods*,": 1,
+         "Yes!": 3,
+         "Yes,": 5
+         }
 
-no_ends = [" isn't online. Sorry. :(",
-           " hasn't liked anything in awhile...",
-           " isn't online right now.",
-           ]
+maybes = {"Hmm...": 5,
+          "Huh,": 4,
+          "*shrugs*": 2,
+          "idk.": 1
+          }
 
-maybe_ends = [" might be online?",
-              " might be here. It's hard to tell.",
-              "'s here, maybe. She might've just gone offline.",
-              " could be online. We can't really tell...",
-              " might be here, or might've just left. Give us a few minutes to see.",
-              " might be online? It's hard to guess, tbh."
-             ]
+
+nos = {"No,": 4,
+       "Sorry,": 5,
+       "Sad day!": 3,
+       ":( ": 1
+       }
+
+yes_ends = {" is online.": 4,
+            " is online, go reblog everything!": 1,
+            " is liking stuff!": 3,
+            "'s online.": 4,
+            "'s hanging out with us!": 2
+            }
+
+no_ends = {" isn't online. Sorry. :/": 3,
+           " hasn't liked anything in awhile.": 4,
+           " isn't online right now.": 6,
+           }
+
+maybe_up_ends = {" might be here. She just liked a few things.": 3,
+                 " could be online, or maybe just liked a couple things and left.": 6,
+                 " might be online? It's hard to guess, tbh.": 1
+                 }
+
+maybe_down_ends = {" might still be online?": 6,
+                   "'s here, maybe. She might've just left.": 5,
+                   " might be here, or just left. Refresh in a minute or two?": 5,
+                   " might be online? It's hard to guess, tbh.": 1
+                   }
