@@ -51,6 +51,8 @@ TEMPLATE_LOADERS = (
     )),
 )
 
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
 CACHES = {
     'default': {
         'BACKEND': 'django_bmemcached.memcached.BMemcached',

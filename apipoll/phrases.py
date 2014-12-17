@@ -44,7 +44,7 @@ def get_maybe_down_end():
 def get_weighted_option(phrase_dict):
     total = sum(phrase_dict.values())
     r = random.randint(1, total)
-    for phrase, weight in maybes.iteritems():
+    for phrase, weight in phrase_dict.iteritems():
         r -= weight
         if r <= 0:
             return phrase
