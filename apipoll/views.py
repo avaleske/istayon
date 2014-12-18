@@ -14,7 +14,6 @@ from django.template import Context
 format_string = u"{0} {1}{2}"
 
 
-#todo do this with a template and divs and pretty
 def index(request):
     context = {}
     packed_values = swrcache.get(settings.LIKED_INFO_KEY)
