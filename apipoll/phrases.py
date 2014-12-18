@@ -49,7 +49,7 @@ def get_weighted_option(phrase_dict):
         if r <= 0:
             return phrase
 
-names = {"Taylor Swift": 6,
+names = {"Taylor Swift": 7,
          "Bae": 5,
          "Mom": 5,
          "T-Swift": 3,
@@ -71,8 +71,6 @@ yeses = {"Yep!": 4,
          }
 
 maybes = {"Hmm...": 5,
-          "Huh,": 4,
-          "*shrugs*": 2,
           "idk.": 1
           }
 
@@ -96,12 +94,10 @@ no_ends = {" isn't online. Sorry. :/": 3,
            }
 
 maybe_up_ends = {" might be here. She just liked a few things.": 3,
-                 " could be online, or maybe just liked a couple things and left.": 6,
-                 " might be online? It's hard to guess, tbh.": 1
+                 " could be online, or maybe just liked a couple things and left.": 6
                  }
 
 maybe_down_ends = {" might still be online?": 6,
                    "'s here, maybe. She might've just left.": 5,
-                   " might be here, or just left. Refresh in a minute or two?": 5,
-                   " might be online? It's hard to guess, tbh.": 1
+                   " might be here, or just left. Refresh in a minute or two?": 5
                    }

@@ -19,13 +19,20 @@ def index(request):
     context = {}
     packed_values = swrcache.get(settings.LIKED_INFO_KEY)
     if not packed_values:
-        try:
-            packed_values = api.get_like_data()
-        except ServerNotFoundError:
-            context['message'] = "Something went wrong and we couldn't connect to Tumblr."
-            return render(request, 'apipoll/index.html', context)
+        packed_values = api.get_like_data()
         swrcache.set(settings.LIKED_INFO_KEY, packed_values, 60)
     count, last_liked, histogram, bins = packed_values
+
+    imstillinbeta_avatar = swrcache.get('ISIB_AVATAR')
+    if not imstillinbeta_avatar:
+        imstillinbeta_avatar = api.get_avatar_url('imstillinbeta', 16)
+        swrcache.set('ISIB_AVATAR', imstillinbeta_avatar, 60*60)
+
+    strangelookonhisface_avatar = swrcache.get('SLOHF_AVATAR')
+    if not strangelookonhisface_avatar:
+        strangelookonhisface_avatar = api.get_avatar_url('strangelookonhisface', 16)
+        swrcache.set('SLOHF_AVATAR', strangelookonhisface_avatar, 60*60)
+
 
     #todo better this to see if she's coming online, leaving, or has been online for awhile
     if histogram:
@@ -46,9 +53,12 @@ def index(request):
         message = format_string.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
 
     context['message'] = message
-    context['count'] = count
-    context['last_liked'] = last_liked
+    context['count'] = "She's liked {0} things.".format(count)
+    context['last_liked'] = u"It's been {0} since she liked something.".format(
+        "awhile" if last_liked is None else timesince(last_liked, timezone.now()))
     context['histogram'] = histogram
+    context['isib'] = imstillinbeta_avatar
+    context['slohf'] = strangelookonhisface_avatar
     return render(request, 'apipoll/index.html', context)
 
 
