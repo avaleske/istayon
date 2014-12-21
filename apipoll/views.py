@@ -38,18 +38,23 @@ def index(request):
         # ramp up
         if histogram[-1] > 0 and histogram[-2] == 0:
             message = format_string.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_up_end())
+            context['title'] = "Maybe - IsTayOnTumblr?"
         # ramp down
         elif histogram[-1] == 0 and histogram[-2] > 0:
             message = format_string.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_down_end())
+            context['title'] = "Maybe - IsTayOnTumblr?"
         # online
         elif histogram[-1] > 0 and histogram[-2] > 0:
             message = format_string.format(phrases.get_yes(), phrases.get_name(), phrases.get_yes_end())
+            context['title'] = "Yes! - IsTayOnTumblr?"
         #offline
         elif sum(histogram[-2:]) == 0:
             message = format_string.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
+            context['title'] = "No - IsTayOnTumblr?"
     #offline
     else:
         message = format_string.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
+        context['title'] = "No - IsTayOnTumblr?"
 
     if histogram:
         context['plot_data'] = map(list, zip(bins[1:], histogram))
@@ -63,7 +68,3 @@ def index(request):
     context['isib'] = imstillinbeta_avatar
     context['slohf'] = strangelookonhisface_avatar
     return render(request, 'apipoll/index.html', context)
-
-
-def to_datetime(timestamp):
-    return datetime.utcfromtimestamp(timestamp).replace(tzinfo=pytz.utc)
