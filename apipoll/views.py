@@ -53,9 +53,8 @@ def index(request):
 
     if histogram:
         context['plot_data'] = map(list, zip(bins[1:], histogram))
-        # this doesn't work yet...
-        context['ticks'] = map(list, zip(bins[-1:], map(
-            lambda x: json.dumps(timesince(to_datetime(x), to_datetime(bins[-1]))), bins[1:])))
+        # hardcoded values assume 2 hours back, five minute intervals
+        context['ticks'] = [[t, 2-(i/12)] for i, t in enumerate(bins[1:]) if i % 12 == 0]
 
     context['message'] = message
     context['count'] = "She's liked {0} things.".format(count)
