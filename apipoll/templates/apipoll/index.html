@@ -1,8 +1,52 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.flot.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/curvedLines.js' %}"></script>
 
+    <script type="text/javascript">
+
+        var options = {
+            yaxis: {
+                show: true,
+                tickLength:0,
+                tickDecimals:0
+            },
+            xaxis: {
+                tickLength:0,
+                tickDecimals:0
+            },
+            grid: {
+                show: true,
+                borderWidth: {
+                        top: 0,
+                        left: 2,
+                        bottom: 2,
+                        right: 0
+                }
+            },
+            series: {
+                     curvedLines: {
+                              apply: true,
+                              active: true,
+                              monotonicFit: true
+                     }
+                 }
+        };
+
+        var series1 = {
+            color: ['#444'],
+            shadowSize: 0,
+            data: {{ plot_data }}
+        }
+
+        $( document ).ready(function() {
+             $.plot($("#chart"), [ series1 ], options);
+        });
+    </script>
 
     <style type="text/css">
     /* some of this based on styling from isup.me */
@@ -15,6 +59,12 @@
     #avatar{vertical-align:middle; padding-left: 0.5em;}
     #message{font-size: 4em;}
     #details{font-size: 2em;}
+    #chart{
+        margin-left: auto ;
+        margin-right: auto ;
+        width:300px;
+        height:200px;
+    }
 
     .nowrap {white-space: nowrap;}
     </style>
@@ -30,7 +80,7 @@
             <li>{{ count }}</li>
         </ul>
     </div>
-    <div id="chart">chart here</div>
+    <div id="chart"></div>
     <div id="footer">
         Site by <span class="nowrap"><a href="http://imstillinbeta.tumblr.com"><img id="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with input from <span class="nowrap"><a href="http://strangelookonhisface.tumblr.com"><img id="avatar" src="{{ slohf }}"> strangelookonhisface</a></span>. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>.
     </div>

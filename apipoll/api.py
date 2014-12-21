@@ -23,9 +23,9 @@ def get_like_data():
 
         if len(likes_response['liked_posts']) > 0:
             now = int(format(timezone.now(), 'U'))
-            seconds_ago = ((now - post['liked_timestamp']) for post in likes_response['liked_posts'])
-            hist = numpy.histogram(numpy.fromiter(seconds_ago, int),
-                                   bins=xrange(0, (HOURS_BACK*60*60)+1, INTERVAL_MINUTES*60))
+            timestamps = ((post['liked_timestamp']) for post in likes_response['liked_posts'])
+            hist = numpy.histogram(numpy.fromiter(timestamps, int),
+                                   bins=xrange(now-(HOURS_BACK*60*60), now+1, INTERVAL_MINUTES*60))
 
             last_liked_time = datetime.utcfromtimestamp(
                 likes_response['liked_posts'][0]['liked_timestamp']).replace(tzinfo=pytz.utc)
