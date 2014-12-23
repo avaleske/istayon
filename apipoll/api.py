@@ -17,22 +17,34 @@ def get_like_data():
         client = pytumblr.TumblrRestClient(settings.TUMBLR_API_KEY)
         pytumblr.TumblrRestClient.blog_likes = blog_likes_fixed    # replace it with our fixed function
 
-        timestamp = int(format(timezone.now() - timedelta(hours=HOURS_BACK), 'U'))
-        likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp, limit=1000)
+        now = timezone.now()
+        #align bin edges to minutes, so for 5 minute intervals, the edges are on the fives.
+        bin_edge_difference = (now.minute % INTERVAL_MINUTES) * 60 + now.second
+        forward_bin_edge_alignment_offset = (INTERVAL_MINUTES * 60) - bin_edge_difference
+        timestamp_start = int(format(now - timedelta(hours=HOURS_BACK), 'U')) - bin_edge_difference
+
+        likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=1000)
         likes_count = likes_response['liked_count']
+        now_unix = int(format(now, 'U'))
 
         if len(likes_response['liked_posts']) > 0:
-            now = int(format(timezone.now(), 'U'))
-            timestamps = ((post['liked_timestamp']) for post in likes_response['liked_posts'])
-            hist = numpy.histogram(numpy.fromiter(timestamps, int),
-                                   bins=xrange(now-(HOURS_BACK*60*60), now+1, INTERVAL_MINUTES*60))
-
             last_liked_time = datetime.utcfromtimestamp(
                 likes_response['liked_posts'][0]['liked_timestamp']).replace(tzinfo=pytz.utc)
 
-            # likes count, histogram, histogram edges
-            return likes_count, last_liked_time, hist[0].tolist(), hist[1].tolist()
-        return likes_count, None, None, None
+            timestamps = ((post['liked_timestamp']) for post in likes_response['liked_posts'])
+
+        else:
+            last_liked_time = None
+            timestamps = [0]
+
+        hist = numpy.histogram(numpy.fromiter(timestamps, int),
+                       bins=xrange(now_unix-(HOURS_BACK*60*60)+forward_bin_edge_alignment_offset-(INTERVAL_MINUTES*60),
+                                   now_unix+forward_bin_edge_alignment_offset+1,
+                                   INTERVAL_MINUTES*60))
+
+
+        # likes count, histogram, histogram edges
+        return likes_count, last_liked_time, hist[0].tolist(), hist[1].tolist()
     except ServerNotFoundError:
         return "Something went wrong and we couldn't connect to Tumblr."
 
