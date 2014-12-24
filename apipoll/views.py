@@ -1,16 +1,12 @@
 import os
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.core.cache import cache
 from django.conf import settings
 from django.utils import timezone
 from django.utils.timesince import timesince
 from datetime import timedelta, datetime
 from apipoll import phrases, api, swrcache
-from httplib2 import ServerNotFoundError
-from django.template import Context
-import pytz
 import json
+import logging
 
 
 format_string = u"{0} {1}{2}"
@@ -18,9 +14,13 @@ TICK_INTERVAL_MINUTES = 20
 
 
 def index(request):
+    log = logging.getLogger(__name__)
+    log.debug('starting request')
     context = {}
     packed_values = swrcache.get(settings.LIKED_INFO_KEY)
     if not packed_values:
+        log.debug("liked info cache miss")
+        print "cache miss"
         packed_values = api.get_like_data()
         swrcache.set(settings.LIKED_INFO_KEY, packed_values, 60)
     count, last_liked, histogram, bins = packed_values
