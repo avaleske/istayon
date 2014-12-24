@@ -14,7 +14,7 @@ import json
 
 
 format_string = u"{0} {1}{2}"
-TICK_INTERVAL_MINUTES = 30
+TICK_INTERVAL_MINUTES = 20
 
 
 def index(request):
@@ -62,14 +62,17 @@ def index(request):
         histogram[5] = 1
         histogram[6] = 1
         histogram[7] = 3
+        histogram[12] = 2
         context['plot_data'] = map(list, zip(bins[1:], histogram))
-        context['xticks'] = []
+        xticks = []
         now_unix = bins[-1]
         start_unix = now_unix - (settings.HOURS_BACK * 60 * 60)
+        tick_width = 60 / TICK_INTERVAL_MINUTES
         for i in xrange(settings.HOURS_BACK * 60 / TICK_INTERVAL_MINUTES + 1):
-            context['xticks'].append([start_unix + i * 60 * TICK_INTERVAL_MINUTES,
-                                    settings.HOURS_BACK - (1.0 * TICK_INTERVAL_MINUTES) / 60 * i])
+            xticks.append([start_unix + i * 60 * TICK_INTERVAL_MINUTES,
+                           settings.HOURS_BACK-(i/tick_width) if i % tick_width == 0 else ""])
         context['xmin'] = start_unix
+        context['xticks'] = json.dumps(xticks)
 
 
     context['message'] = message

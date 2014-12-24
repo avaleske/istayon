@@ -39,12 +39,13 @@
                 tickLength:5,
                 min:0,
                 tickDecimals:0,
-                minTickSize: 2
+                minTickSize: 2,
+                ticks:2
             },
             xaxis: {
                 tickLength:5,
                 axisLabel: 'hours ago',
-                ticks: {{ xticks }},
+                ticks: {{ xticks|safe }},
                 min: {{ xmin }}
             },
             grid: {
@@ -63,7 +64,7 @@
         var series1 = {
             color: ['#444'],
             shadowSize: 0,
-            data: {{ plot_data }}
+            data: {{ plot_data|safe }}
         }
 
         $( document ).ready(function() {
@@ -89,9 +90,9 @@
         width:350px;
         height:175px;
     }
-    .flot-tick-label, .axisLabels {font-size: 2em;}
+    .axisLabels {font-size: 2em;}
     .axisLabels {padding-top: 0.5em}
-    .flot-tick-label {padding-right: 0.25em; padding-left: 0.25em;}
+    .flot-tick-label {font-size: 1.75em; padding-right: 0.25em; padding-left: 0.25em;}
     .flot-x-axis {margin-top: 0.5em; }
     .nowrap {white-space: nowrap;}
     </style>

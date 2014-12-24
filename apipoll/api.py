@@ -16,8 +16,8 @@ def get_like_data():
 
         now = timezone.now()
         # align bin edges to minutes, so for 5 minute intervals, the edges are on the fives.
-        # bin_edge_difference is the part from the 5 to the time, like: 5 ### |       10
-        # forward_bin_edge_alignment_offset is the part from the time to the 10, like: 5     | ##### 10
+        # bin_edge_difference is the part from the 5 to the time, like: [5 ### |       10]
+        # forward_bin_edge_alignment_offset is the part from the time to the 10, like: [5     | ##### 10]
         bin_edge_difference = (now.minute % settings.INTERVAL_MINUTES) * 60 + now.second
         forward_bin_edge_alignment_offset = (settings.INTERVAL_MINUTES * 60) - bin_edge_difference
         timestamp_start = int(format(
