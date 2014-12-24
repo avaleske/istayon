@@ -21,14 +21,11 @@ DEFAULT_TIMEOUT = 60*5
 def get(key):
     packed_val = cache.get(key)
     if packed_val is None:
-        print "never set"
         return None
     val, refresh_time, refreshing = packed_val
-    print refresh_time, time.time()
     if (time.time() > refresh_time) and not refreshing:
         # Store the stale value while the cache revalidates for another
         # MINT_DELAY seconds.
-        print "storing stale"
         set(key, val, timeout=MINT_DELAY, refreshing=True)
         return None
     return val
@@ -36,11 +33,10 @@ def get(key):
 
 def set(key, val, timeout=DEFAULT_TIMEOUT, refreshing=False):
     if refreshing:
-        real_timeout = timeout + time.time()
+        timeout_time = timeout + time.time()
     else:
-        real_timeout = timeout + MINT_DELAY + time.time()
-    packed_val = (val, real_timeout, refreshing)
-    print('about to set {0} with value {1} and timeout{2}'.format(key, val, timeout))
-    return cache.set(key, packed_val, real_timeout)
+        timeout_time = timeout + MINT_DELAY + time.time()
+    packed_val = (val, timeout_time, refreshing)
+    return cache.set(key, packed_val, timeout_time)
 
 delete = cache.delete

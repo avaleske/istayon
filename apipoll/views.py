@@ -15,18 +15,18 @@ TICK_INTERVAL_MINUTES = 20
 
 def index(request):
     log = logging.getLogger(__name__)
-    log.debug('starting request')
     context = {}
     packed_values = swrcache.get(settings.LIKED_INFO_KEY)
     if not packed_values:
         log.debug("liked info cache miss")
-        print "cache miss"
+        print "liked cache miss"
         packed_values = api.get_like_data()
         swrcache.set(settings.LIKED_INFO_KEY, packed_values, 60)
     count, last_liked, histogram, bins = packed_values
 
     imstillinbeta_avatar = swrcache.get('ISIB_AVATAR')
     if not imstillinbeta_avatar:
+        print 'avatar cache miss'
         imstillinbeta_avatar = api.get_avatar_url('imstillinbeta', 16)
         swrcache.set('ISIB_AVATAR', imstillinbeta_avatar, 60*60)
 
