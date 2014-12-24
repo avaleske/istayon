@@ -114,3 +114,7 @@ TAYLOR_BLOG_URL = 'taylorswift.tumblr.com'
 #cache keys
 LIKED_COUNT_KEY = 'liked_count'
 LIKED_INFO_KEY = 'liked_info'
+
+#api constants
+HOURS_BACK = 2
+INTERVAL_MINUTES = 5

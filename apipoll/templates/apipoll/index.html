@@ -36,15 +36,16 @@
         var options = {
             yaxis: {
                 show: true,
-                tickLength:0,
+                tickLength:5,
                 min:0,
                 tickDecimals:0,
                 minTickSize: 2
             },
             xaxis: {
-                tickLength:0,
+                tickLength:5,
                 axisLabel: 'hours ago',
-                ticks: {{ ticks }}
+                ticks: {{ xticks }},
+                min: {{ xmin }}
             },
             grid: {
                 show: true,
@@ -86,9 +87,12 @@
         margin-right: auto ;
         margin-top: 10em;
         width:350px;
-        height:150px;
+        height:175px;
     }
     .flot-tick-label, .axisLabels {font-size: 2em;}
+    .axisLabels {padding-top: 0.5em}
+    .flot-tick-label {padding-right: 0.25em; padding-left: 0.25em;}
+    .flot-x-axis {margin-top: 0.5em; }
     .nowrap {white-space: nowrap;}
     </style>
 

@@ -14,6 +14,7 @@ import json
 
 
 format_string = u"{0} {1}{2}"
+TICK_INTERVAL_MINUTES = 30
 
 
 def index(request):
@@ -57,14 +58,24 @@ def index(request):
         context['title'] = "No - IsTayOnTumblr?"
 
     if histogram:
+        histogram[0] = 3
+        histogram[5] = 1
+        histogram[6] = 1
+        histogram[7] = 3
         context['plot_data'] = map(list, zip(bins[1:], histogram))
-        # hardcoded values assume 2 hours back, five minute intervals
-        context['ticks'] = [[t, 2-(i/12)] for i, t in enumerate(bins[1:]) if i % 12 == 0]
+        context['xticks'] = []
+        now_unix = bins[-1]
+        start_unix = now_unix - (settings.HOURS_BACK * 60 * 60)
+        for i in xrange(settings.HOURS_BACK * 60 / TICK_INTERVAL_MINUTES + 1):
+            context['xticks'].append([start_unix + i * 60 * TICK_INTERVAL_MINUTES,
+                                    settings.HOURS_BACK - (1.0 * TICK_INTERVAL_MINUTES) / 60 * i])
+        context['xmin'] = start_unix
+
 
     context['message'] = message
     context['count'] = "She's liked {0} things.".format(count)
     context['last_liked'] = u"It's been {0} since she liked something.".format(
-        "awhile" if last_liked is None else timesince(last_liked, timezone.now()))
+        "over two hours" if last_liked is None else timesince(last_liked, timezone.now()))
     context['isib'] = imstillinbeta_avatar
     context['slohf'] = strangelookonhisface_avatar
     return render(request, 'apipoll/index.html', context)

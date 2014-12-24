@@ -8,9 +8,6 @@ from django.conf import settings
 from httplib2 import ServerNotFoundError
 import pytumblr
 
-HOURS_BACK = 2
-INTERVAL_MINUTES = 5
-
 
 def get_like_data():
     try:
@@ -18,10 +15,13 @@ def get_like_data():
         pytumblr.TumblrRestClient.blog_likes = blog_likes_fixed    # replace it with our fixed function
 
         now = timezone.now()
-        #align bin edges to minutes, so for 5 minute intervals, the edges are on the fives.
-        bin_edge_difference = (now.minute % INTERVAL_MINUTES) * 60 + now.second
-        forward_bin_edge_alignment_offset = (INTERVAL_MINUTES * 60) - bin_edge_difference
-        timestamp_start = int(format(now - timedelta(hours=HOURS_BACK), 'U')) - bin_edge_difference
+        # align bin edges to minutes, so for 5 minute intervals, the edges are on the fives.
+        # bin_edge_difference is the part from the 5 to the time, like: 5 ### |       10
+        # forward_bin_edge_alignment_offset is the part from the time to the 10, like: 5     | ##### 10
+        bin_edge_difference = (now.minute % settings.INTERVAL_MINUTES) * 60 + now.second
+        forward_bin_edge_alignment_offset = (settings.INTERVAL_MINUTES * 60) - bin_edge_difference
+        timestamp_start = int(format(
+            now - timedelta(hours=settings.HOURS_BACK, minutes=settings.INTERVAL_MINUTES), 'U')) - bin_edge_difference
 
         likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=1000)
         likes_count = likes_response['liked_count']
@@ -37,17 +37,21 @@ def get_like_data():
             last_liked_time = None
             timestamps = [0]
 
-        hist = numpy.histogram(numpy.fromiter(timestamps, int),
-                       bins=xrange(now_unix-(HOURS_BACK*60*60)+forward_bin_edge_alignment_offset-(INTERVAL_MINUTES*60),
-                                   now_unix+forward_bin_edge_alignment_offset+1,
-                                   INTERVAL_MINUTES*60))
+        hist = numpy.histogram(
+            numpy.fromiter(timestamps, int),
+            bins=xrange(now_unix
+                        - (settings.HOURS_BACK*60*60)
+                        + forward_bin_edge_alignment_offset
+                        - (2*settings.INTERVAL_MINUTES*60),
+                        now_unix+forward_bin_edge_alignment_offset+1,
+                        settings.INTERVAL_MINUTES*60))
 
         #set last edge of histogram to now
         hist[1][-1] = now_unix
         # likes count, histogram, histogram edges
         return likes_count, last_liked_time, hist[0].tolist(), hist[1].tolist()
     except ServerNotFoundError:
-        return "Something went wrong and we couldn't connect to Tumblr."
+        return "Something went wrong and we couldn't connect to Tumblr.", None, None, None
 
 
 def get_avatar_url(blog_name, size=16):
