@@ -21,7 +21,7 @@ def index(request):
         log.debug("liked info cache miss")
         print "liked cache miss"
         packed_values = api.get_like_data()
-        swrcache.set(settings.LIKED_INFO_KEY, packed_values, 60)
+        swrcache.set(settings.LIKED_INFO_KEY, packed_values, timeout=60)
     count, last_liked, histogram, bins = packed_values
 
     imstillinbeta_avatar = swrcache.get('ISIB_AVATAR')

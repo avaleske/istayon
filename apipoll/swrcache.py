@@ -32,7 +32,7 @@ def get(key):
 
 
 def set(key, val, timeout=DEFAULT_TIMEOUT, refreshing=False):
-    refresh_time = time.time()
+    refresh_time = time.time() + timeout
     if refreshing:
         real_timeout = timeout
     else:
