@@ -32,11 +32,12 @@ def get(key):
 
 
 def set(key, val, timeout=DEFAULT_TIMEOUT, refreshing=False):
+    refresh_time = time.time()
     if refreshing:
-        timeout_time = timeout + time.time()
+        real_timeout = timeout
     else:
-        timeout_time = timeout + MINT_DELAY + time.time()
-    packed_val = (val, timeout_time, refreshing)
-    return cache.set(key, packed_val, timeout_time)
+        real_timeout = timeout + MINT_DELAY
+    packed_val = (val, refresh_time, refreshing)
+    return cache.set(key, packed_val, real_timeout)
 
 delete = cache.delete
