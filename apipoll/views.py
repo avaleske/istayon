@@ -18,7 +18,7 @@ def index(request):
     context = {}
     packed_values = swrcache.get(settings.LIKED_INFO_KEY)
     if not packed_values:
-        log.info("liked info cache miss")
+        log.info("liked_info cache miss")
         packed_values = api.get_like_data()
         swrcache.set(settings.LIKED_INFO_KEY, packed_values, timeout=60)
     count, last_liked, histogram, bins = packed_values

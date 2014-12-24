@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import dj_database_url
+import sys
 import urlparse
 import json
 
@@ -124,7 +125,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '[%(asctime)s] [%(process)d] [%(levelname)s] %(module)s %(message)s'
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
@@ -138,10 +139,11 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
+        'apipoll': {
             'handlers': ['console'],
             'propagate': True,
             'level': 'INFO',
+            'stream': sys.stdout
         }
     }
 }
