@@ -42,7 +42,8 @@ def get_like_data():
                                    now_unix+forward_bin_edge_alignment_offset+1,
                                    INTERVAL_MINUTES*60))
 
-
+        #set last edge of histogram to now
+        hist[1][-1] = now_unix
         # likes count, histogram, histogram edges
         return likes_count, last_liked_time, hist[0].tolist(), hist[1].tolist()
     except ServerNotFoundError:
