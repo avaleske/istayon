@@ -58,11 +58,6 @@ def index(request):
         context['title'] = "No - IsTayOnTumblr?"
 
     if histogram:
-        histogram[0] = 3
-        histogram[5] = 1
-        histogram[6] = 1
-        histogram[7] = 3
-        histogram[12] = 2
         context['plot_data'] = map(list, zip(bins[1:], histogram))
         xticks = []
         now_unix = bins[-1]
