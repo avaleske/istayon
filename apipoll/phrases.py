@@ -88,13 +88,13 @@ yes_ends = {" is online.": 4,
             "'s hanging out with us!": 2
             }
 
-no_ends = {" isn't online. Sorry. :/": 3,
+no_ends = {" isn't online. :/": 3,
            " hasn't liked anything in awhile.": 4,
            " isn't online right now.": 6,
            }
 
 maybe_up_ends = {" might be here. She just liked a few things.": 3,
-                 " could be online, or maybe just liked a couple things and left.": 6
+                 " just liked a few things, but might not stay.": 6
                  }
 
 maybe_down_ends = {" might still be online?": 6,
