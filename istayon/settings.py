@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apipoll',
+    'ganalytics',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,6 +105,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', False))
 TEMPLATE_DEBUG = bool(os.environ.get('DEBUG', False))
+
+GANALYTICS_TRACKING_CODE = os.environ.get('GANALYTICS_TRACKING_CODE', '')
 
 #Tumblr
 
