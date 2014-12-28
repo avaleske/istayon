@@ -10,7 +10,7 @@ import logging
 
 
 format_string = u"{0} {1}{2}"
-TICK_INTERVAL_MINUTES = 20
+TICK_INTERVAL_MINUTES = 15
 
 
 def index(request):
