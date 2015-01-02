@@ -21,6 +21,8 @@ def index(request):
         log.info("liked_info cache miss")
         packed_values = api.get_like_data()
         swrcache.set(settings.LIKED_INFO_KEY, packed_values, timeout=60)
+    if packed_values == "error":
+        return render(request, 'apipoll/index.html', get_error_context())
     count, last_liked, histogram, bins = packed_values
 
     imstillinbeta_avatar = swrcache.get('ISIB_AVATAR')
@@ -75,3 +77,13 @@ def index(request):
     context['isib'] = imstillinbeta_avatar
     context['slohf'] = strangelookonhisface_avatar
     return render(request, 'apipoll/index.html', context)
+
+
+def get_error_context():
+    context = {}
+    context['message'] = "Sorry, we had trouble connecting to Tumblr."
+    context['count'] = "She's liked some things, but we can't tell how many."
+    context['last_liked'] = "We can't tell when she last liked something, right now."
+    context['isib'] = ""
+    context['slohf'] = ""
+    return context

@@ -51,7 +51,7 @@ def get_like_data():
         # likes count, histogram, histogram edges
         return likes_count, last_liked_time, hist[0].tolist(), hist[1].tolist()
     except ServerNotFoundError:
-        return "Something went wrong and we couldn't connect to Tumblr.", None, None, None
+        return "error"
 
 
 def get_avatar_url(blog_name, size=16):
