@@ -66,13 +66,11 @@ yeses = {"Yep!": 4,
          "Yep,": 5,
          "YAAS,": 3,
          "Everything's shiny, Cap'n,": 1,
-         "*nods*,": 1,
          "Yes!": 3,
          "Yes,": 5
          }
 
-maybes = {"Hmm...": 5,
-          "idk.": 1
+maybes = {"Hmm,": 5,
           }
 
 
@@ -88,7 +86,7 @@ yes_ends = {" is online.": 4,
             "'s hanging out with us!": 2,
             }
 
-no_ends = {" isn't online. :/": 3,
+no_ends = {" isn't online.": 3,
            " hasn't liked anything in awhile.": 4,
            " isn't online right now.": 6
            }

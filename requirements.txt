@@ -4,6 +4,7 @@ PyYAML==3.11
 dj-database-url==0.3.0
 dj-static==0.0.6
 django-bmemcached==0.2.2
+django-emoji==2.0.0
 django-ganalytics==0.3
 django-toolbelt==0.0.1
 gunicorn==19.1.1

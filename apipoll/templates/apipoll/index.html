@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load ganalytics %}
+{% load emoji_tags %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -40,6 +41,7 @@
 
     #footer{margin-top: 2%; margin-bottom: 5%;}
     .avatar{vertical-align:middle; padding-left: 0.5em;}
+    .emoji{vertical-align: middle;}
     #message{font-size: 4em;}
     #details{font-size: 2em; margin-top: 5%;}
     #announcement{font-size: 1.5em; margin-top: 10%;}
@@ -82,7 +84,7 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <div id="message">{{ message }}</div>
+    <div id="message">{{ message|emoji_replace_unicode }}</div>
     <div class="container">
         <div id="details">
             <ul>

@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'apipoll',
     'ganalytics',
+    'emoji',
 )
 
 MIDDLEWARE_CLASSES = (
