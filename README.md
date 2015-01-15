@@ -15,4 +15,6 @@ I don’t want to hit the Tumblr API on every request, since that would lock up 
 
 I use Numpy to bin the results from the “blog/likes” API call into five minute intervals, so I end up with a histogram of likes/interval. I use flot.js to plot this histogram and provide a visual representation of recent activity.
 
+It also scales responsively between desktop browsers and mobile size browsers. It’s based solely on the browser window width.
+
 I recently added a check to see if the site is being loaded on an iPhone/iPad/iPod, and if that’s the case any links to Tumblr use the x-callback-url spec to open the Tumblr app. It’s unlikely anyone using this doesn’t have Tumblr installed on their phone, so I don’t handle that case yet. Based on Google Analytics Android devices are a small minority as well, so on Android links still go the the Tumblr website.
