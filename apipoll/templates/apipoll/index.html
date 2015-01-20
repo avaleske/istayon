@@ -39,16 +39,17 @@
     a:hover{text-decoration:none;}
     ul {list-style-type: none;}
 
-    #footer{margin-top: 2%; margin-bottom: 5%;}
+
     .avatar{vertical-align:middle; padding-left: 0.5em;}
     .emoji{vertical-align: middle;}
     #message{font-size: 4em;}
     #details{font-size: 2em; margin-top: 5%;}
-    #announcement{font-size: 1.5em; margin-top: 10%;}
+    #announcement{font-size: 1.5em; margin-top: 5%;}
+    #footer{margin-top: 5%; margin-bottom: 5%;}
     #chart{
         margin-left: auto ;
         margin-right: auto ;
-        margin-top: 10%;
+        margin-top: 5%;
         width:400px;
         height:175px;
         display: inline-block;
@@ -64,7 +65,7 @@
       #message, #footer {
         width: 100%;
       }
-      #footer {
+      #footer, #chart, #announcement {
           margin-top: 10%;
       }
       ul {list-style-type: disc;}
@@ -95,7 +96,8 @@
     </div>
     <div id="chart"></div>
     <div id="announcement">
-        Help get the word out by sharing this with your followers? Reblog <a id="reblog_link">this post</a> or <a id="create_link">make a link post</a>.
+{#         Help get the word out by sharing this with your followers? Reblog <a id="reblog_link">this post</a> or <a id="create_link">make a link post</a>. #}
+    &quot;Be nice to people. Respect people. Don’t hate.&quot; <br /> - <a id="the1989ers">the1989ers</a>
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with input from <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span>. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>.
@@ -149,20 +151,23 @@
         var tumblr_link_name = "IsTayOnTumblr?";
         var tumblr_link_description = "";
 
-        var create_link = document.getElementById("create_link");
-        var reblog_link = document.getElementById("reblog_link");
+{#        var create_link = document.getElementById("create_link");#}
+{#        var reblog_link = document.getElementById("reblog_link");#}
+        var the1989ers_link = document.getElementById("the1989ers");
         var isib_link = document.getElementById("isib_link");
         var slohf_link = document.getElementById("slohf_link");
 
         if(/iP(ad|hone|od)/.test(navigator.userAgent)){
-            create_link.setAttribute("href", "tumblr://x-callback-url/link?title=" + encodeURIComponent(tumblr_link_name) + " &url=" + encodeURIComponent(tumblr_link_url) + "&description=" + encodeURIComponent(tumblr_link_description));
-            reblog_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=imstillinbeta&postID=106189387107")
+{#            create_link.setAttribute("href", "tumblr://x-callback-url/link?title=" + encodeURIComponent(tumblr_link_name) + " &url=" + encodeURIComponent(tumblr_link_url) + "&description=" + encodeURIComponent(tumblr_link_description));#}
+{#            reblog_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=imstillinbeta&postID=106189387107")#}
+            the1989ers_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=the1989ers&postID=108591868193")
             slohf_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=strangelookonhisface")
             isib_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=imstillinbeta")
         }
         else {
-            create_link.setAttribute("href", "http://www.tumblr.com/share/link?url=" + encodeURIComponent(tumblr_link_url) + "&name=" + encodeURIComponent(tumblr_link_name) + "&description=" + encodeURIComponent(tumblr_link_description));
-            reblog_link.setAttribute("href", "http://imstillinbeta.tumblr.com/post/106189387107/istayontumblr")
+{#            create_link.setAttribute("href", "http://www.tumblr.com/share/link?url=" + encodeURIComponent(tumblr_link_url) + "&name=" + encodeURIComponent(tumblr_link_name) + "&description=" + encodeURIComponent(tumblr_link_description));#}
+{#            reblog_link.setAttribute("href", "http://imstillinbeta.tumblr.com/post/106189387107/istayontumblr")#}
+            the1989ers_link.setAttribute("href", "http://the1989ers.tumblr.com/post/108591868193/be-nice-to-people-respect-people-dont-hate")
         }
     </script>
     {% ganalytics %}
