@@ -80,10 +80,9 @@ nos = {"No,": 6,
        }
 
 yes_ends = {" is online.": 4,
-            " is online, go reblog everything!": 1,
             " is liking stuff!": 3,
             "'s online.": 4,
-            "'s hanging out with us!": 2,
+            " is hanging out with us!": 2,
             }
 
 no_ends = {" isn't online.": 3,
