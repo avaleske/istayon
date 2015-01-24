@@ -25,15 +25,7 @@ def index(request):
         return render(request, 'apipoll/index.html', get_error_context())
     count, last_liked, histogram, bins = packed_values
 
-    imstillinbeta_avatar = swrcache.get('ISIB_AVATAR')
-    if not imstillinbeta_avatar:
-        imstillinbeta_avatar = api.get_avatar_url('imstillinbeta', 16)
-        swrcache.set('ISIB_AVATAR', imstillinbeta_avatar, 60*60)
-
-    strangelookonhisface_avatar = swrcache.get('SLOHF_AVATAR')
-    if not strangelookonhisface_avatar:
-        strangelookonhisface_avatar = api.get_avatar_url('strangelookonhisface', 16)
-        swrcache.set('SLOHF_AVATAR', strangelookonhisface_avatar, 60*60)
+    imstillinbeta_avatar, strangelookonhisface_avatar = get_avatar_urls()
 
     if histogram:
         # ramp up
@@ -77,6 +69,26 @@ def index(request):
     context['isib'] = imstillinbeta_avatar
     context['slohf'] = strangelookonhisface_avatar
     return render(request, 'apipoll/index.html', context)
+
+
+def tos(request):
+    context = {}
+    imstillinbeta_avatar, strangelookonhisface_avatar = get_avatar_urls()
+    context['isib'] = imstillinbeta_avatar
+    context['slohf'] = strangelookonhisface_avatar
+    return render(request, 'apipoll/tos.html', context)
+
+
+def get_avatar_urls():
+    imstillinbeta_avatar = swrcache.get('ISIB_AVATAR')
+    if not imstillinbeta_avatar:
+        imstillinbeta_avatar = api.get_avatar_url('imstillinbeta', 16)
+        swrcache.set('ISIB_AVATAR', imstillinbeta_avatar, 60 * 60)
+    strangelookonhisface_avatar = swrcache.get('SLOHF_AVATAR')
+    if not strangelookonhisface_avatar:
+        strangelookonhisface_avatar = api.get_avatar_url('strangelookonhisface', 16)
+        swrcache.set('SLOHF_AVATAR', strangelookonhisface_avatar, 60 * 60)
+    return imstillinbeta_avatar, strangelookonhisface_avatar
 
 
 def get_error_context():

@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load ganalytics %}
-{% load emoji_tags %}
+{# copy/pasting for now. I need to do template inheritance but sick-brain. #}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -40,25 +40,12 @@
     a:hover{text-decoration:none;}
     ul {list-style-type: none;}
 
-
+    /* oh this is shitty. I'll fix it soon*/
     .avatar{vertical-align:middle; padding-left: 0.5em;}
     .emoji{vertical-align: middle;}
-    #message{font-size: 4em;}
-    #details{font-size: 2em; margin-top: 5%;}
-    #announcement{font-size: 1.5em; margin-top: 5%;}
+    #message{font-size: 4em;, width: 60%}
+    #details{font-size: 2em; margin-top: 5%; width: 60%; text-align: left; display: inline-block;}
     #footer{margin-top: 5%; margin-bottom: 5%;}
-    #chart{
-        margin-left: auto ;
-        margin-right: auto ;
-        margin-top: 5%;
-        width:400px;
-        height:175px;
-        display: inline-block;
-    }
-    .axisLabels {font-size: 2em;}
-    .axisLabels {padding-top: 0.5em}
-    .flot-tick-label {font-size: 1.75em; padding-right: 0.25em; padding-left: 0.25em;}
-    .flot-x-axis {margin-top: 0.5em; }
     .nowrap {white-space: nowrap;}
     .container {text-align: center; width:100%}
 
@@ -69,104 +56,41 @@
       #footer, #chart, #announcement {
           margin-top: 10%;
       }
-      ul {list-style-type: disc;}
       #details {
           text-align: left;
           display: inline-block;
           width: 95%
       }
-      #chart {
-          display: inline-block;
-          width: 90%
-      }
     }
 
     </style>
 
-    <title>{{ title }}</title>
+    <title>IsTayOnTumblr? Terms of Service</title>
 </head>
 <body>
-    <div id="message">{{ message|emoji_replace_unicode }}</div>
+    <div id="message">Hi! Here's some &quot;Terms of Service.&quot;</div>
     <div class="container">
         <div id="details">
-            <ul>
-                <li>{{ last_liked }}</li>
-                <li>{{ count }}</li>
-            </ul>
+            <p>
+                By continuing to use this website you agree not to take Taylor's lurking for granted. You agree to use this site for the good of the community, not for evil. You agree that you will try to get Taylor's attention by writing funny posts, supporting each other, and being generally awesome, not by groveling, threatening harm, or just plain throwing a tantrum. (Otherwise, baby now we got bad blood.)
+            </p>
+            <p>
+                By continuing to use this site you acknowledge that it is designed to be a more informative version of Taylor's likes page, a tool to help you know when she is active (or quietly lurking) so other swifties might be online, and you agree to use it as such. You understand that it is not a stalking tool.
+            </p>
+            <p>
+                Finally, you agree to do what you can to spread kindness in this community, and that you won't ever forget to be awesome. (Because honestly, neither of those ever go out of style.)
+            </p>
+            <p>
+                Sound good? Head back to the <a href="/">home page</a>.
+            </p>
         </div>
-    </div>
-    <div id="chart"></div>
-    <div id="announcement">
-        We wrote some &quot;<a href="/tos">Terms of Service</a>&quot; for this site. Check them out. It's important, and they're not as boring as it sounds.
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with help from <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span>. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. Check out the &quot;<a href="/tos">Terms of Service</a>.&quot;
     </div>
 
-    <!-- plotting things -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/flot.concatenated.js' %}"></script>
-    <script type="text/javascript">
-        var options = {
-            yaxis: {
-                show: true,
-                tickLength:5,
-                min:0,
-                tickDecimals:0,
-                minTickSize: 2,
-                ticks:2
-            },
-            xaxis: {
-                tickLength:5,
-                axisLabel: 'hours ago',
-                ticks: {{ xticks|safe }},
-                min: {{ xmin }}
-            },
-            grid: {
-                show: true,
-                borderWidth: {top: 0, left: 0, bottom: 0, right: 0}
-            },
-            series: {
-                     curvedLines: {
-                              apply: true,
-                              active: true,
-                              monotonicFit: true
-                     }
-                 }
-        };
 
-        var series1 = {
-            color: ['#444'],
-            shadowSize: 0,
-            data: {{ plot_data|safe }}
-        }
 
-        $( document ).ready(function() {
-             $.plot($("#chart"), [ series1 ], options);
-        });
-    </script>
-
-    <script type="text/javascript">
-        var tumblr_link_url = "http://istayontumblr.com";
-        var tumblr_link_name = "IsTayOnTumblr?";
-        var tumblr_link_description = "";
-
-{#        var create_link = document.getElementById("create_link");#}
-{#        var reblog_link = document.getElementById("reblog_link");#}
-        var isib_link = document.getElementById("isib_link");
-        var slohf_link = document.getElementById("slohf_link");
-
-        if(/iP(ad|hone|od)/.test(navigator.userAgent)){
-{#            create_link.setAttribute("href", "tumblr://x-callback-url/link?title=" + encodeURIComponent(tumblr_link_name) + " &url=" + encodeURIComponent(tumblr_link_url) + "&description=" + encodeURIComponent(tumblr_link_description));#}
-{#            reblog_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=imstillinbeta&postID=106189387107")#}
-            slohf_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=strangelookonhisface")
-            isib_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=imstillinbeta")
-        }
-        else {
-{#            create_link.setAttribute("href", "http://www.tumblr.com/share/link?url=" + encodeURIComponent(tumblr_link_url) + "&name=" + encodeURIComponent(tumblr_link_name) + "&description=" + encodeURIComponent(tumblr_link_description));#}
-{#            reblog_link.setAttribute("href", "http://imstillinbeta.tumblr.com/post/106189387107/istayontumblr")#}
-        }
-    </script>
     {% ganalytics %}
 </body>
 </html>
