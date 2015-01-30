@@ -7,9 +7,11 @@ from django.utils import timezone
 from django.conf import settings
 from httplib2 import ServerNotFoundError
 import pytumblr
+import logging
 
 
 def get_like_data():
+    log = logging.getLogger(__name__)
     try:
         client = pytumblr.TumblrRestClient(settings.TUMBLR_API_KEY)
         pytumblr.TumblrRestClient.blog_likes = blog_likes_fixed    # replace it with our fixed function
@@ -24,6 +26,8 @@ def get_like_data():
             now - timedelta(hours=settings.HOURS_BACK, minutes=settings.INTERVAL_MINUTES), 'U')) - bin_edge_difference
 
         likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=1000)
+        #log.info(likes_response)
+        #log.info(client.blog_likes(settings.TAYLOR_BLOG_URL, limit=10))
         likes_count = likes_response['liked_count']
         now_unix = int(format(now, 'U'))
 
