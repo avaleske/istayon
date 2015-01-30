@@ -24,11 +24,12 @@ def get_like_data():
         forward_bin_edge_alignment_offset = (settings.INTERVAL_MINUTES * 60) - bin_edge_difference
         timestamp_start = int(format(
             now - timedelta(hours=settings.HOURS_BACK, minutes=settings.INTERVAL_MINUTES), 'U')) - bin_edge_difference
+        limit = 500
 
-        log.info("Requesting likes from {0} after {1}, limit {2}".format(settings.TAYLOR_BLOG_URL, timestamp_start, 1000))
+        log.info("Requesting likes from {0} after {1}, limit {2}".format(settings.TAYLOR_BLOG_URL, timestamp_start, limit))
         # tumblr's broken at the moment, so commenting this out
-        #likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=1000)
-        likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, limit=1000)
+        #likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=limit)
+        likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, limit=limit)
         likes_count = likes_response['liked_count']
         now_unix = int(format(now, 'U'))
 
