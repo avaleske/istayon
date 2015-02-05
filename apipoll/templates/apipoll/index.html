@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load ganalytics %}
 {% load emoji_tags %}
+{% load humanize %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -91,7 +92,7 @@
         <div id="details">
             <ul>
                 <li>{{ last_liked }}</li>
-                <li>{{ count }}</li>
+                <li>She's liked {{ count|intcomma }} things.</li>
             </ul>
         </div>
     </div>

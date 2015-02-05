@@ -26,7 +26,7 @@ def get_like_data():
             now - timedelta(hours=settings.HOURS_BACK, minutes=settings.INTERVAL_MINUTES), 'U')) - bin_edge_difference
         limit = 500
 
-        log.info("Requesting likes from {0} after {1}, limit {2}".format(settings.TAYLOR_BLOG_URL, timestamp_start, limit))
+        log.info("Requesting likes from {0}, limit {1}".format(settings.TAYLOR_BLOG_URL, limit))
         # tumblr's broken at the moment, so commenting this out
         #likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=limit)
         likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, limit=limit)
@@ -54,9 +54,13 @@ def get_like_data():
 
         #set last edge of histogram to now
         hist[1][-1] = now_unix
+        hist_data = hist[0].tolist()
+        hist_edeges = hist[1].tolist()
         # likes count, histogram, histogram edges
-        return likes_count, last_liked_time, hist[0].tolist(), hist[1].tolist()
+        log.info("like results: {0} {1} {2} {3}".format(likes_count, last_liked_time, hist_data, hist_edeges))
+        return likes_count, last_liked_time, hist_data, hist_edeges
     except ServerNotFoundError:
+        log.error("Couldn't reach Tumblr.")
         return "error"
 
 

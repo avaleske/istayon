@@ -61,9 +61,8 @@ def index(request):
         context['xmin'] = start_unix
         context['xticks'] = json.dumps(xticks)
 
-
     context['message'] = message
-    context['count'] = "She's liked {0} things.".format(count)
+    context['count'] = count
     context['last_liked'] = u"It's been {0} since she liked something.".format(
         "over two hours" if last_liked is None else timesince(last_liked, timezone.now()))
     context['isib'] = imstillinbeta_avatar
