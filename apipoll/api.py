@@ -24,24 +24,32 @@ def get_like_data():
         forward_bin_edge_alignment_offset = (settings.INTERVAL_MINUTES * 60) - bin_edge_difference
         timestamp_start = int(format(
             now - timedelta(hours=settings.HOURS_BACK, minutes=settings.INTERVAL_MINUTES), 'U')) - bin_edge_difference
-        limit = 500
+        limit = 500     # but tumblr might be actually limiting at 50...
+        tries = 7
+        timestamps = []
 
-        log.info("Requesting likes from {0}, limit {1}".format(settings.TAYLOR_BLOG_URL, limit))
-        # tumblr's broken at the moment, so commenting this out
-        #likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=limit)
-        likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, limit=limit)
+        # make at most "tries" tries at getting her likes. We limit it so if she likes stuff between loops it won't go forever
+        # this basically always results in an extra api call with no likes, which is sucky.
+        for i in xrange(tries):
+            log.info("Requesting likes from {0}, after {1}, limit {2}".format(settings.TAYLOR_BLOG_URL, timestamp_start, limit))
+            likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=limit)
+            log.info("Got {0} likes".format(len(likes_response['liked_posts'])))
+
+            if len(likes_response['liked_posts']) > 0:
+                last_liked_time = datetime.utcfromtimestamp(
+                    likes_response['liked_posts'][0]['liked_timestamp']).replace(tzinfo=pytz.utc)
+                timestamps.extend((post['liked_timestamp']) for post in likes_response['liked_posts'])
+                timestamp_start = likes_response['liked_posts'][0]['liked_timestamp']
+
+            else:
+                break
+
+        if not timestamps:
+            timestamps = [0]
+            last_liked_time = None
+
         likes_count = likes_response['liked_count']
         now_unix = int(format(now, 'U'))
-
-        if len(likes_response['liked_posts']) > 0:
-            last_liked_time = datetime.utcfromtimestamp(
-                likes_response['liked_posts'][0]['liked_timestamp']).replace(tzinfo=pytz.utc)
-
-            timestamps = ((post['liked_timestamp']) for post in likes_response['liked_posts'])
-
-        else:
-            last_liked_time = None
-            timestamps = [0]
 
         hist = numpy.histogram(
             numpy.fromiter(timestamps, int),
