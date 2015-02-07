@@ -90,11 +90,11 @@ no_ends = {" isn't online.": 3,
            " isn't online right now.": 6
            }
 
-maybe_up_ends = {" might be here. She just liked a few things.": 3,
-                 " just liked a few things, but might not stay.": 6
+maybe_up_ends = {" might be here. She just liked a few things.": 6,
+                 " just liked a few things...": 3
                  }
 
 maybe_down_ends = {" might still be online?": 6,
-                   "'s here, maybe. She might've just left.": 5,
+                   " is here, maybe. She might've just left.": 5,
                    " might be here, or just left. Refresh in a minute or two?": 5
                    }

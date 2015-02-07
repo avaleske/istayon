@@ -22,29 +22,32 @@ def get_like_data():
         # forward_bin_edge_alignment_offset is the part from the time to the 10, like: [5     | ##### 10]
         bin_edge_difference = (now.minute % settings.INTERVAL_MINUTES) * 60 + now.second
         forward_bin_edge_alignment_offset = (settings.INTERVAL_MINUTES * 60) - bin_edge_difference
-        timestamp_start = int(format(
+        timestamp_end = int(format(
             now - timedelta(hours=settings.HOURS_BACK, minutes=settings.INTERVAL_MINUTES), 'U')) - bin_edge_difference
-        limit = 500     # but tumblr might be actually limiting at 50...
+
+        limit = 50     # but tumblr might be actually limiting at 20...
+        offset = 0
         tries = 7
         timestamps = []
 
-        # make at most "tries" tries at getting her likes. We limit it so if she likes stuff between loops it won't go forever
-        # this basically always results in an extra api call with no likes, which is sucky.
+        # loop over the likes api call until we have likes from before HOURS_BACK
+        # if she likes something between api calls we might have one or two duplicates, it doesn't really matter
         for i in xrange(tries):
-            log.info("Requesting likes from {0}, after {1}, limit {2}".format(settings.TAYLOR_BLOG_URL, timestamp_start, limit))
-            likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, after=timestamp_start, limit=limit)
-            log.info("Got {0} likes".format(len(likes_response['liked_posts'])))
+            log.info("Requesting likes from {0}, offset {1}, limit {2}".format(settings.TAYLOR_BLOG_URL, offset, limit))
+            likes_response = client.blog_likes(settings.TAYLOR_BLOG_URL, offset=offset, limit=limit)
+            response_count = len(likes_response['liked_posts'])
+            log.info("Got {0} likes".format(response_count))
 
-            if len(likes_response['liked_posts']) > 0:
-                last_liked_time = datetime.utcfromtimestamp(
-                    likes_response['liked_posts'][0]['liked_timestamp']).replace(tzinfo=pytz.utc)
-                timestamps.extend((post['liked_timestamp']) for post in likes_response['liked_posts'])
-                timestamp_start = likes_response['liked_posts'][0]['liked_timestamp']
+            offset += response_count
+            timestamps.extend((post['liked_timestamp']) for post in likes_response['liked_posts'])
 
-            else:
+            # if we've gone far enough back, then stop
+            if timestamps[-1] < timestamp_end:
                 break
 
-        if not timestamps:
+        if timestamps:
+            last_liked_time = datetime.utcfromtimestamp(timestamps[0]).replace(tzinfo=pytz.utc)
+        else:
             timestamps = [0]
             last_liked_time = None
 
@@ -52,7 +55,7 @@ def get_like_data():
         now_unix = int(format(now, 'U'))
 
         hist = numpy.histogram(
-            numpy.fromiter(timestamps, int),
+            numpy.fromiter(timestamps, int, count=offset),
             bins=xrange(now_unix
                         - (settings.HOURS_BACK*60*60)
                         + forward_bin_edge_alignment_offset
