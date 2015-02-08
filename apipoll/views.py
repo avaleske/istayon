@@ -50,6 +50,8 @@ def index(request):
         context['title'] = "No - IsTayOnTumblr?"
 
     if histogram:
+        # I just put the data on the forward edge of the bin, so ignore the first bin edge.
+        # at some point maybe I should center it on the bin, but this worked for now.
         context['plot_data'] = map(list, zip(bins[1:], histogram))
         xticks = []
         now_unix = bins[-1]
