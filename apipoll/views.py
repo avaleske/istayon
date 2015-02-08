@@ -55,6 +55,9 @@ def index(request):
         now_unix = bins[-1]
         start_unix = now_unix - (settings.HOURS_BACK * 60 * 60)
         tick_width = 60 / TICK_INTERVAL_MINUTES
+        # define the tick locations on the plot
+        # basically, make a list of lists, where each sublist is [tick location, tick text]
+        # and if it's not on an hour, then just use an empty string for the text
         for i in xrange(settings.HOURS_BACK * 60 / TICK_INTERVAL_MINUTES + 1):
             xticks.append([start_unix + i * 60 * TICK_INTERVAL_MINUTES,
                            settings.HOURS_BACK-(i/tick_width) if i % tick_width == 0 else ""])
