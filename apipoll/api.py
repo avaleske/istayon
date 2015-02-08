@@ -18,8 +18,8 @@ def get_like_data():
 
         now = timezone.now()
         # align bin edges to minutes, so for 5 minute intervals, the edges are on the fives.
-        # bin_edge_difference is the part from the 5 to the time, like: [5 ### |       10]
-        # forward_bin_edge_alignment_offset is the part from the time to the 10, like: [5     | ##### 10]
+        # bin_edge_difference is the part from the 5 to the time, like: [2:05 ### |2:07:03|       2:10]
+        # forward_bin_edge_alignment_offset is the part from the time to the 10, like: [2:05    |2:07:03| ##### 2:10]
         bin_edge_difference = (now.minute % settings.INTERVAL_MINUTES) * 60 + now.second
         forward_bin_edge_alignment_offset = (settings.INTERVAL_MINUTES * 60) - bin_edge_difference
         timestamp_end = int(format(
@@ -56,6 +56,8 @@ def get_like_data():
 
         hist = numpy.histogram(
             numpy.fromiter(timestamps, int, count=offset),
+            # woo timestamp math. this just makes an iterator that defines where the bin edges should be
+            # we start from a safe point before the left edge of the plot and end a safe place in the future
             bins=xrange(now_unix
                         - (settings.HOURS_BACK*60*60)
                         + forward_bin_edge_alignment_offset
