@@ -37,7 +37,7 @@ MEMCACHEDCLOUD_USERNAME=<this can be blank for local>
 MEMCACHEDCLOUD_PASSWORD=<you don't need this either>
 ```
 - Open the postgres console (should just be able to hit the elephant in your menu bar) and create a database called `istayon` with `CREATE DATABASE istayon`. You might have to make a user first? Try it, and check the PostgreSQL documentation if it doesn't work. (I'm writing this from memory.)
-- from the root of the project, run `./manage.py syncdb` to setup the django databases. This might ask you to create a superuser. That's for the admin interface, which isn't currently used, but go ahead and make one if you want.
+- From the root of the project, run `foreman run ./manage.py syncdb` to setup the django databases. This might ask you to create a superuser. That's for the admin interface, which isn't currently used, but go ahead and make one if you want.
 - I think you should just be able to do `foreman start web` at this point. I'm sorry if I'm missing something. If it's working, you chould be able to go to `localhost:5000` and see the site.
 
 If I forgot something or it doesn't work, open an issue or let me know. If you want to deploy to Heroku, I'm using the Heroku Postgres, MemcachedCloud, Papertrail, and New Relic addons, so you'll need to provision those. They all have free tiers.
