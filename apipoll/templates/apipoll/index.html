@@ -74,7 +74,7 @@
       #details {
           text-align: left;
           display: inline-block;
-          width: 95%
+          width: 97%
       }
       #chart {
           display: inline-block;
@@ -91,14 +91,15 @@
     <div class="container">
         <div id="details">
             <ul>
-                <li>{{ last_liked|naturaltime }}</li>
+                <li>{{ last_liked }}</li>
                 <li>She's liked {{ count|intcomma }} things.</li>
             </ul>
         </div>
     </div>
     <div id="chart"></div>
     <div id="announcement">
-      Taylor, know that we're all so proud of you, no matter what.
+        To give Taylor some privacy the last-liked-time is now a little less specific, but it will still update the minute she's back. <br>
+        In the meantime, here's a friendly reminder why we're here. (<a href="/tos">x</a>)
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span> on the assist. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. <span class="nowrap">Here are some <a href="/tos">guidelines</a> for using the site.</span> And if you're in the EU we're supposed to tell you that this site uses cookies, so there's that.

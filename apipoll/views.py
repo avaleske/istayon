@@ -68,8 +68,10 @@ def index(request):
 
     context['message'] = message
     context['count'] = count
+    # reduce specificity if it's been over six hours since she liked something.
     context['last_liked'] = u"It's been {0} since she liked something.".format(
-        "over two hours" if last_liked is None else timesince(last_liked, timezone.now()))
+        timesince(last_liked, timezone.now()) if (timezone.now() - last_liked < timedelta(hours=6))
+        else "about " + timesince(last_liked, timezone.now()).split(',')[0])
     context['isib'] = imstillinbeta_avatar
     context['slohf'] = strangelookonhisface_avatar
     return render(request, 'apipoll/index.html', context)
