@@ -7,6 +7,7 @@ django-bmemcached==0.2.2
 django-emoji==2.0.0
 django-ganalytics==0.3
 django-toolbelt==0.0.1
+futures==2.2.0
 gunicorn==19.1.1
 httplib2==0.9
 httpretty==0.8.3
@@ -17,5 +18,6 @@ psycopg2==2.5.4
 python-binary-memcached==0.24.3
 pytz==2014.10
 static3==0.5.1
+trollius==1.0.4
 urllib3==1.7.1
 wsgiref==0.1.2
