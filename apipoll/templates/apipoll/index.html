@@ -48,12 +48,11 @@
     #details{font-size: 2em; margin-top: 5%;}
     #announcement{font-size: 1.5em; margin-top: 5%;}
     #footer{margin-top: 5%; margin-bottom: 5%; width: 70%; display: inline-block;}
-    #chart{
+    #chart, #gif {
         margin-left: auto ;
         margin-right: auto ;
         margin-top: 5%;
         width:400px;
-        height:175px;
         display: inline-block;
     }
     .axisLabels {font-size: 2em;}
@@ -76,7 +75,7 @@
           display: inline-block;
           width: 97%
       }
-      #chart {
+      #chart, #gif{
           display: inline-block;
           width: 90%
       }
@@ -96,7 +95,10 @@
             </ul>
         </div>
     </div>
-    <div id="chart"></div>
+    <div id="gif">
+        <img src="{% static 'ellen.gif' %}">
+    </div>
+{#    <div id="chart"></div>#}
     <div id="announcement">
         Welcome back, Taylor!
     </div>
