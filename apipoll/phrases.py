@@ -82,19 +82,15 @@ nos = {"No,": 6,
 yes_ends = {" is online.": 4,
             " is liking stuff!": 3,
             "'s online.": 4,
-            " is hanging out with us!": 2,
+            " is out of her cabinet!": 6
             }
 
-no_ends = {" isn't online.": 3,
-           " hasn't liked anything in awhile.": 4,
-           " isn't online right now.": 6
+no_ends = {" is probably hiding in her cabinet.": 6
            }
 
-maybe_up_ends = {" might be here. She just liked a few things.": 6,
+maybe_up_ends = {" might be out of her cabinet.": 6,
                  " just liked a few things...": 3
                  }
 
-maybe_down_ends = {" might still be online?": 6,
-                   " is here, maybe. She might've just left.": 5,
-                   " might be here, or just left. Refresh in a minute or two?": 5
+maybe_down_ends = {" probably went back in her cabinet.": 6
                    }
