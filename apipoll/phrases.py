@@ -58,6 +58,7 @@ names = {"Taylor Swift": 7,
          "Becky": 5,
          "Tay Tay": 2,
          "T-Swizzle": 3,
+         "Shifty Swifty": 3,
          u"\U0001F385": 2,   # santa emoji
          u"\U0001F48C": 5    # love letter emoji
          }
@@ -82,12 +83,13 @@ nos = {"No,": 6,
 yes_ends = {" is online.": 4,
             " is liking stuff!": 3,
             "'s online.": 4,
-            " is hanging out with us!": 2,
+            " is out of her cabinet!": 1
             }
 
 no_ends = {" isn't online.": 3,
            " hasn't liked anything in awhile.": 4,
-           " isn't online right now.": 6
+           " isn't online right now.": 6,
+           " is probably hiding in her cabinet.": 1
            }
 
 maybe_up_ends = {" might be here. She just liked a few things.": 6,
@@ -96,5 +98,6 @@ maybe_up_ends = {" might be here. She just liked a few things.": 6,
 
 maybe_down_ends = {" might still be online?": 6,
                    " is here, maybe. She might've just left.": 5,
-                   " might be here, or just left. Refresh in a minute or two?": 5
+                   " might be here, or she just left.": 5,
+                   " probably went back in her cabinet.": 1
                    }
