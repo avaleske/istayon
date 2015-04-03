@@ -8,10 +8,26 @@ from django.conf import settings
 from httplib2 import ServerNotFoundError
 import pytumblr
 import logging
+from apipoll import swrcache
 
 
-def get_like_data():
-    log = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
+
+
+def get_like_data_through_cache():
+    packed_values = swrcache.get(settings.LIKED_INFO_KEY)
+    if not packed_values:
+        log.info("liked_info cache miss")
+        packed_values = __get_like_data()
+        swrcache.set(settings.LIKED_INFO_KEY, packed_values, timeout=60)
+    return packed_values
+
+
+def get_avatar_urls():
+    return __get_avatar_url('imstillinbeta'), __get_avatar_url('strangelookonhisface')
+
+
+def __get_like_data():
     try:
         client = pytumblr.TumblrRestClient(settings.TUMBLR_API_KEY)
         pytumblr.TumblrRestClient.blog_likes = blog_likes_fixed    # replace it with our fixed function
@@ -77,12 +93,17 @@ def get_like_data():
         return "error"
 
 
-def get_avatar_url(blog_name, size=16):
-    try:
-        client = pytumblr.TumblrRestClient(settings.TUMBLR_API_KEY)
-        return client.avatar(blog_name, size=size)['avatar_url']
-    except ServerNotFoundError:
-        return None
+def __get_avatar_url(blog_name, size=16):
+    cache_key = blog_name + '_AVATAR'
+    avatar = swrcache.get(cache_key)
+    if not avatar:
+        try:
+            client = pytumblr.TumblrRestClient(settings.TUMBLR_API_KEY)
+            avatar = client.avatar(blog_name, size=size)['avatar_url']
+        except ServerNotFoundError:
+            avatar = None
+        swrcache.set(cache_key, avatar, 60 * 60)
+    return avatar
 
 
 # Fixing the blog_likes() function, because it's broken in the api.
