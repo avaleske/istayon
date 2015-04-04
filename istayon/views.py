@@ -33,7 +33,7 @@ def index(request):
             message = MESSAGE_FORMAT_STRING.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_down_end())
             context['title'] = "Maybe - IsTayOnTumblr?"
         # online
-        elif histogram[-1] > 0 and histogram[-2] > 0:
+        elif (histogram[-1] > 0 and histogram[-2] > 0) or sum(histogram[-2:]) > 5:
             message = MESSAGE_FORMAT_STRING.format(phrases.get_yes(), phrases.get_name(), phrases.get_yes_end())
             context['title'] = "Yes! - IsTayOnTumblr?"
         #offline
@@ -84,7 +84,7 @@ def tos(request):
 def get_error_context():
     context = {}
     context['message'] = "Sorry, we had trouble connecting to Tumblr."
-    context['count'] = "She's liked some things, but we can't tell how many."
+    context['count'] = "some"
     context['last_liked'] = "We can't tell when she last liked something, right now."
     context['isib'] = ""
     context['slohf'] = ""
