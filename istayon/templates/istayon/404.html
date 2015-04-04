@@ -1,0 +1,71 @@
+{% load staticfiles %}
+{% load ganalytics %}
+{# copy/pasting for now. I need to do template inheritance but sick-brain. #}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta NAME="Description" CONTENT="Is Taylor Swift liking stuff on Tumblr?">
+    <meta name="application-name" content="IsTayOnTumblr?">
+    <meta name="apple-mobile-web-app-title" content="IsTayOn?">
+
+    {% include "istayon/favicons.html" %}
+
+    <style type="text/css">
+    /* some of this based on styling from isup.me */
+    body{background-color:#fff;color:#444;font-family:Arial,Verdana,sans-serif;font-size:62.5%;margin:10% 5% 0 5%;text-align:center;}
+    a,a:visited,a:active{color:#444;text-decoration:underline;}
+    a:hover{text-decoration:none;}
+    ul {list-style-type: none;}
+
+    /* oh this is shitty. I'll fix it soon*/
+    .avatar{vertical-align:middle; padding-left: 0.5em;}
+    .emoji{vertical-align: middle;}
+    #message{font-size: 4em;, width: 60%}
+    #details{font-size: 2em; margin-top: 5%; width: 60%; text-align: left; display: inline-block;}
+    #footer{margin-top: 5%; margin-bottom: 5%; width: 70%; display: inline-block;}
+    .nowrap {white-space: nowrap;}
+    .container {text-align: center; width:100%}
+
+    @media (max-width: 600px) {
+      #message, #footer {
+        width: 100%;
+      }
+      #footer, #chart, #announcement {
+          margin-top: 10%;
+      }
+      #details {
+          text-align: left;
+          display: inline-block;
+          width: 95%
+      }
+    }
+
+    </style>
+
+    <title>IsTayOnTumblr? Terms of Service</title>
+</head>
+<body>
+    <div id="message">You found Wonderland!</div>
+    <div class="container">
+        <div id="details">
+            <p>
+                Actually no... no you didn't.
+            </p>
+            <p>
+                This is a 404 page. How did you even get here?
+            </p>
+            <p>I guess... go back to the <a href="/">home page</a>, or something...?
+            </p>
+        </div>
+    </div>
+    <div id="footer">
+        Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span> on the assist. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. <span class="nowrap">Here are some <a href="/tos">guidelines</a> for using the site.</span> And if you're in the EU we're supposed to tell you that this site uses cookies, so there's that.
+    </div>
+
+
+
+    {% ganalytics %}
+</body>
+</html>

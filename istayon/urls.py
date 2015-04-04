@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tos', istayon.views.tos, name="tos"),
     url(r'^$', istayon.views.index, name="index"),
-
 )
+
+handler404 = 'istayon.views.page_not_found'

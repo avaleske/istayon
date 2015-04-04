@@ -81,6 +81,14 @@ def tos(request):
     return render(request, 'istayon/tos.html', context)
 
 
+def page_not_found(request):
+    context = {}
+    imstillinbeta_avatar, strangelookonhisface_avatar = api.get_avatar_urls()
+    context['isib'] = imstillinbeta_avatar
+    context['slohf'] = strangelookonhisface_avatar
+    return render(request, 'istayon/404.html', context, status=404)
+
+
 def get_error_context():
     context = {}
     context['message'] = "Sorry, we had trouble connecting to Tumblr."
