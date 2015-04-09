@@ -51,7 +51,7 @@ def get_weighted_option(phrase_dict):
 
 names = {"Taylor Swift": 7,
          "Bae": 5,
-         "Mom": 5,
+         #"Mom": 5,
          "T-Swift": 3,
          "Taylor": 7,
          "Tay": 5,
