@@ -69,18 +69,13 @@
         <div id="details">
             <ul>
                 <li>{{ last_liked }}</li>
-                <li>She's liked {{ count|intcomma }} <a href="https://www.tumblr.com/liked/by/taylorswift" target=_blank">things</a>.</li>
+                <li>She's liked {{ count|intcomma }} <a href="https://www.tumblr.com/liked/by/taylorswift" target="_blank">things</a>.</li>
             </ul>
         </div>
     </div>
     <div id="chart"></div>
     <div id="announcement">
-        And we didn't know if you knew <br/>
-        So we're taking this chance to say <br/>
-        That we've had the best day <br/>
-        with you today. <br/>
-        <br/>
-        We love you, Andrea.
+        Some thoughts on like notifications (<a id="notification_link" href="http://imstillinbeta.tumblr.com/post/117354517982" target="_blank">x</a>).
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span> on the assist. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. <span class="nowrap">Here are some <a href="/tos">guidelines</a> for using the site.</span> And if you're in the EU we're supposed to tell you that this site uses cookies, so there's that.
@@ -136,14 +131,17 @@
 
 {#        var create_link = document.getElementById("create_link");#}
 {#        var reblog_link = document.getElementById("reblog_link");#}
-        var isib_link = document.getElementById("isib_link");
-        var slohf_link = document.getElementById("slohf_link");
+        var $isib_link = $("#isib_link");
+        var $slohf_link = $("#slohf_link");
+        var $notification_link = $("#notification_link");
 
         if(/iP(ad|hone|od)/.test(navigator.userAgent)){
 {#            create_link.setAttribute("href", "tumblr://x-callback-url/link?title=" + encodeURIComponent(tumblr_link_name) + " &url=" + encodeURIComponent(tumblr_link_url) + "&description=" + encodeURIComponent(tumblr_link_description));#}
 {#            reblog_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=imstillinbeta&postID=106189387107")#}
-            slohf_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=strangelookonhisface")
-            isib_link.setAttribute("href", "tumblr://x-callback-url/blog?blogName=imstillinbeta")
+            $slohf_link.attr('href', "tumblr://x-callback-url/blog?blogName=strangelookonhisface")
+            $isib_link.attr('href', "tumblr://x-callback-url/blog?blogName=imstillinbeta")
+
+            $notification_link.attr('href', "tumblr://x-callback-url/blog?blogName=imstillinbeta&postID=117354517982")
         }
         else {
 {#            create_link.setAttribute("href", "http://www.tumblr.com/share/link?url=" + encodeURIComponent(tumblr_link_url) + "&name=" + encodeURIComponent(tumblr_link_name) + "&description=" + encodeURIComponent(tumblr_link_description));#}
