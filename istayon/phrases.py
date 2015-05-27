@@ -59,6 +59,7 @@ names = {"Taylor Swift": 7,
          "Tay Tay": 2,
          "T-Swizzle": 3,
          "Shifty Swifty": 3,
+         "Aunt Becky": 3,
          u"\U0001F385": 2,   # santa emoji
          u"\U0001F48C": 5    # love letter emoji
          }
