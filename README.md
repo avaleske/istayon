@@ -1,4 +1,4 @@
-istayon
+IsTayOnTumblr?
 =======
 
 A super simple Django site to see if Taylor Swift is on Tumblr right now. You can see it at [istayontumblr.com](http://istayontumblr.com)
