@@ -93,7 +93,7 @@ def get_error_context():
     context = {}
     context['message'] = "Sorry, we had trouble connecting to Tumblr."
     context['count'] = "some"
-    context['last_liked'] = "We can't tell when she last liked something, right now."
+    context['last_liked'] = "We can't tell when she last liked something right now."
     context['isib'] = ""
     context['slohf'] = ""
     return context
