@@ -88,7 +88,7 @@ def __get_like_data():
         # likes count, histogram, histogram edges
         log.info("like results: {0} {1} {2} {3}".format(likes_count, last_liked_time, hist_data, hist_edeges))
         return likes_count, last_liked_time, hist_data, hist_edeges
-    except ServerNotFoundError:
+    except (ServerNotFoundError, KeyError):
         log.error("Couldn't reach Tumblr.")
         return "error"
 
