@@ -119,6 +119,13 @@ LIKED_INFO_KEY = 'liked_info'
 HOURS_BACK = 2
 INTERVAL_MINUTES = 5
 
+# stripe
+assert 'STRIPE_SECRET_KEY' in os.environ, 'Set STRIPE_SECRET_KEY in your .env file!'
+STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_KEY']
+
+assert 'STRIPE_PUBLIC_KEY' in os.environ, 'Set STRIPE_PUBLIC_KEY in your .env file!'
+STRIPE_PUBLIC_KEY = os.environ['STRIPE_PUBLIC_KEY']
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

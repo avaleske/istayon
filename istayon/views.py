@@ -89,6 +89,14 @@ def page_not_found(request):
     return render(request, 'istayon/404.html', context, status=404)
 
 
+def donate(request):
+    context = {}
+    imstillinbeta_avatar, strangelookonhisface_avatar = api.get_avatar_urls()
+    context['isib'] = imstillinbeta_avatar
+    context['slohf'] = strangelookonhisface_avatar
+    return render(request, 'istayon/donate.html', context)
+
+
 def get_error_context():
     context = {}
     context['message'] = "Sorry, we had trouble connecting to Tumblr."
@@ -97,3 +105,4 @@ def get_error_context():
     context['isib'] = ""
     context['slohf'] = ""
     return context
+
