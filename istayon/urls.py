@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tos', istayon.views.tos, name="tos"),
+    url(r'^supporters', istayon.views.supporters, name="supporters"),
     url(r'^$', istayon.views.index, name="index"),
 )
 

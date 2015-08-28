@@ -80,6 +80,12 @@ def tos(request):
     context['slohf'] = strangelookonhisface_avatar
     return render(request, 'istayon/tos.html', context)
 
+def supporters(request):
+    context = {}
+    imstillinbeta_avatar, strangelookonhisface_avatar = api.get_avatar_urls()
+    context['isib'] = imstillinbeta_avatar
+    context['slohf'] = strangelookonhisface_avatar
+    return render(request, 'istayon/supporters.html', context)
 
 def page_not_found(request):
     context = {}
