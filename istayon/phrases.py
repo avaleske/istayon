@@ -88,10 +88,12 @@ yes_ends = {" is online.": 4,
             }
 
 no_ends = {" isn't online.": 3,
-           " hasn't liked anything in awhile.": 4,
-           " isn't online right now.": 6,
+           " hasn't liked anything in awhile.": 3,
+           " isn't online right now.": 5,
            " is probably hiding in her cabinet.": 1,
            " must be off mom-crooning to Britney Spears.": 1,
+           " is likely home making caramel delight.": 1,
+           " isn't on. Meerkat Manor must not have wifi.": 1,
            }
 
 maybe_up_ends = {" might be here. She just liked a few things.": 6,
