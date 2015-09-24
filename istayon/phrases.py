@@ -60,8 +60,8 @@ names = {"Taylor Swift": 7,
          "T-Swizzle": 3,
          "Shifty Swifty": 3,
          "Aunt Becky": 3,
-         u"\U0001F385": 2,   # santa emoji
-         u"\U0001F48C": 5    # love letter emoji
+         u"\U0001F385": 1,   # santa emoji
+         u"\U0001F48C": 1    # love letter emoji
          }
 
 yeses = {"Yep!": 4,
@@ -77,8 +77,8 @@ maybes = {"Hmm,": 5,
 
 
 nos = {"No,": 6,
-       "Sad day!": 3,
-       ":( ": 1
+       "Sad day!": 2,
+       ":( ": 2
        }
 
 yes_ends = {" is online.": 4,
@@ -87,13 +87,14 @@ yes_ends = {" is online.": 4,
             " is out of her cabinet!": 1
             }
 
-no_ends = {" isn't online.": 3,
-           " hasn't liked anything in awhile.": 3,
-           " isn't online right now.": 5,
+no_ends = {" isn't online.": 5,
+           " hasn't liked anything in awhile.": 5,
+           " isn't online right now.": 4,
            " is probably hiding in her cabinet.": 1,
            " must be off mom-crooning to Britney Spears.": 1,
            " is likely home making caramel delight.": 1,
            " isn't on. Meerkat Manor must not have wifi.": 1,
+           " isn't online, but she found herself and somehow that was everything.": 2,
            }
 
 maybe_up_ends = {" might be here. She just liked a few things.": 6,
