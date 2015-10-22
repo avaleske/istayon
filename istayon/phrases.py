@@ -94,6 +94,7 @@ no_ends = {" isn't online.": 5,
            " is likely home making caramel delight.": 1,
            " isn't on. Meerkat Manor must not have wifi.": 1,
            " isn't online, but she found herself and somehow that was everything.": 2,
+           " isn't on, but she might be looking for that All Too Well CD so...": 2,
            }
 
 maybe_up_ends = {" might be here. She just liked a few things.": 6,
