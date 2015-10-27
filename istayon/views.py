@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.timesince import timesince
 from apipoll import api
 from istayon import phrases
+import random
 
 
 MESSAGE_FORMAT_STRING = u"{0} {1}{2}"
@@ -62,7 +63,25 @@ def index(request):
         context['xmin'] = start_unix
         context['xticks'] = json.dumps(xticks)
 
-    context['message'] = message
+    # temporarily not showing the message so we can show secret messages from the liner notes.
+    # since it's the anniversary of 1989 after all
+    secret_message = [
+        "We begin our story in New York.",
+        "There once was a girl known by everyone and no one.",
+        "Her heart belonged to someone who couldn't stay.",
+        "They loved each other recklessly.",
+        "They paid the price.",
+        "She danced to forget him.",
+        "He drove past her street each night.",
+        "She made friends and enemies.",
+        "He only saw her in his dreams.",
+        "Then one day he came back.",
+        "Timing is a funny thing.",
+        "And everyone was watching.",
+        "She lost him but she found Tumblr and somehow that was everything."
+    ]
+
+    context['message'] = random.choice(secret_message)
     context['count'] = count
     # reduce specificity if it's been over six hours since she liked something.
     context['last_liked'] = u"It's been {0} since she liked something.".format(
