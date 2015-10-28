@@ -63,9 +63,8 @@ def index(request):
         context['xmin'] = start_unix
         context['xticks'] = json.dumps(xticks)
 
-    # temporarily not showing the message so we can show secret messages from the liner notes.
-    # since it's the anniversary of 1989 after all
-    secret_message = [
+    # I'm going to leave the secret messages in for a bit
+    secret_messages = [
         "We begin our story in New York.",
         "There once was a girl known by everyone and no one.",
         "Her heart belonged to someone who couldn't stay.",
@@ -81,7 +80,8 @@ def index(request):
         "She lost him but she found Tumblr and somehow that was everything."
     ]
 
-    context['message'] = random.choice(secret_message)
+    context['message'] = \
+        random.choice(secret_messages) if random.randint(0, 100) == 1 else message
     context['count'] = count
     # reduce specificity if it's been over six hours since she liked something.
     context['last_liked'] = u"It's been {0} since she liked something.".format(
