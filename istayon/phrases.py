@@ -59,8 +59,9 @@ names = {"Taylor Swift": 7,
          "T-Swizzle": 3,
          "Shifty Swifty": 3,
          "Aunt Becky": 3,
-         u"\U0001F385": 1,   # santa emoji
-         u"\U0001F48C": 1    # love letter emoji
+         u"\U0001F385": 1,    # santa emoji
+         u"\U0001F48C": 1,    # love letter emoji
+         u"\U000026C4": 5,    # snowman emoji
          }
 
 yeses = {"Yep!": 4,
