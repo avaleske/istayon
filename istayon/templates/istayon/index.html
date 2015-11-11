@@ -34,7 +34,11 @@
         height:175px;
         display: inline-block;
         background-color: #BEBEBE;
-        background-image: url('https://41.media.tumblr.com/6fe6c9367fb013923111b63b93532de7/tumblr_nxn5wkET8x1qdp9g4o1_1280.jpg');
+        background-image: linear-gradient(
+          rgba(128, 128, 128, 0.45), 
+          rgba(128, 128, 128, 0.45)
+        ),
+        url('https://41.media.tumblr.com/6fe6c9367fb013923111b63b93532de7/tumblr_nxn5wkET8x1qdp9g4o1_1280.jpg');
         background-size: 100% 100%;
 
     }
@@ -125,13 +129,12 @@
                               apply: true,
                               active: true,
                               monotonicFit: true
-                     },
-                     colors: ['#FFFFFF']
-                 }
+                     }
+                 },
+            colors: ['white']
         };
 
         var series1 = {
-            color: ['#FFFFFF'],
             shadowSize: 0,
             data: {{ plot_data|safe }}
         }
