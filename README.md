@@ -7,7 +7,7 @@ A super simple Django site to see if Taylor Swift is on Tumblr right now. You ca
 
 It polls the Tumblr API to see if she's liked or posted anything recently, and makes a guess as to whether or not she's currently online. It's pretty simple so far.
 
-The UI needs a refactor pretty badly. I know a lot more about JS, CSS, Sass, Django templates, etc. than I did when I wrote this.
+The UI needs a refactor pretty badly. I know a lot more about JS, CSS, Sass, Django templates, etc. than I did when I wrote this. Currently I've hacked in some stuff to celebrate the anniversary of the Fearless release.
 
 ##Setup##
 ###Install Prereqs###

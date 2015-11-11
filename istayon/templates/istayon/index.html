@@ -30,13 +30,17 @@
         margin-left: auto ;
         margin-right: auto ;
         margin-top: 5%;
-        width:400px;
+        width:383px;
         height:175px;
         display: inline-block;
+        background-color: #BEBEBE;
+        background-image: url('https://41.media.tumblr.com/6fe6c9367fb013923111b63b93532de7/tumblr_nxn5wkET8x1qdp9g4o1_1280.jpg');
+        background-size: 100% 100%;
+
     }
-    .axisLabels {font-size: 1.75em;}
+    .axisLabels {font-size: 1.75em; color:#FFFFFF;}
     .axisLabels {padding-top: 0.5em}
-    .flot-tick-label {font-size: 1.75em; padding-right: 0.25em; padding-left: 0.25em;}
+    .flot-tick-label {font-size: 1.75em; padding-right: 0.25em; padding-left: 0.25em; color:#FFFFFF;}
     .flot-x-axis {margin-top: 0.5em; }
     .nowrap {white-space: nowrap;}
     .container {text-align: center; width:100%}
@@ -125,7 +129,7 @@
         };
 
         var series1 = {
-            color: ['#444'],
+            color: ['#FFFFFF'],
             shadowSize: 0,
             data: {{ plot_data|safe }}
         }
