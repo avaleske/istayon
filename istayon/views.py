@@ -77,7 +77,7 @@ def index(request):
         "But I miss replying and tagging and blogging in the rain,\nAnd it's 2am and I'm @ing your name.",
         "Did I tag something way too honest make you run and hide?",
         "I'm thirteen now\nAnd don't know how\nMy friends could post that meme.",
-        "Because this site will change.\nCan you feel it now?\nThese walls that staff put up to hold us back will fall down."]
+        "Because Tumblr will change.\nCan you feel it now?\nThese walls that staff put up to hold us back will fall down."]
 
     context['message'] = random.choice(fearless_messages)
     context['count'] = count
