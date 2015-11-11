@@ -63,25 +63,23 @@ def index(request):
         context['xmin'] = start_unix
         context['xticks'] = json.dumps(xticks)
 
-    # I'm going to leave the secret messages in for a bit
-    secret_messages = [
-        "We begin our story in New York.",
-        "There once was a girl known by everyone and no one.",
-        "Her heart belonged to someone who couldn't stay.",
-        "They loved each other recklessly.",
-        "They paid the price.",
-        "She danced to forget him.",
-        "He drove past her street each night.",
-        "She made friends and enemies.",
-        "He only saw her in his dreams.",
-        "Then one day he came back.",
-        "Timing is a funny thing.",
-        "And everyone was watching.",
-        "She lost him but she found Tumblr and somehow that was everything."
-    ]
+    # some messages to celebrate the fearless anniversary
+    fearless_messages = [
+        "In this moment now screen-capture, it remember it.",
+        "You blog in class next to redhead named Abigail.",
+        "Follow me Juliet, you'll never have to be alone.",
+        "Cause I can't help it if you tag like an angel.",
+        "Now it's too late for you and your fanmail to come around.",
+        "Been here all along so why can't you see,\nJust reblog from me.",
+        "People are people, and sometimes we change our themes.",
+        "Anon could write a blog on how to ruin someone's perfect day.",
+        "I've been giving out reblogs every time and all you do is let me down.",
+        "But I miss replying and tagging and blogging in the rain,\nAnd it's 2am and I'm @ing your name.",
+        "Did I tag something way too honest make you run and hide?",
+        "I'm thirteen now\nAnd don't know how\nMy friends could post that meme.",
+        "Because this site will change.\nCan you feel it now?\nThese walls that staff put up to hold us back will fall down."]
 
-    context['message'] = \
-        random.choice(secret_messages) if random.randint(0, 100) == 1 else message
+    context['message'] = random.choice(fearless_messages)
     context['count'] = count
     # reduce specificity if it's been over six hours since she liked something.
     context['last_liked'] = u"It's been {0} since she liked something.".format(
