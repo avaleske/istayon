@@ -69,7 +69,7 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <div id="message">{{ message|emoji_replace_unicode }}</div>
+    <div id="message">{{ message|linebreaks|emoji_replace_unicode }}</div>
     <div class="container">
         <div id="details">
             <ul>
@@ -81,6 +81,12 @@
     </div>
     <div id="chart"></div>
     <div id="announcement">
+    Hey Taylor, we could give you fifty reasons <br>
+    why we should be the ones you lurk.<br>
+    All those other blogs – well, they're beautiful <br>
+    but would they code a site for you? :P
+    <br><br>
+    In all seriousness, Taylor, thank you for keeping us Fearless for the last seven years.
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span> on the assist. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. Support us at <a href="https://www.patreon.com/imstillinbeta">Patreon</a> and we'll add your url to our <a href="/supporters">supporters page</a>. <span class="nowrap">Here are some <a href="/tos">guidelines</a> for using the site.</span> And if you're in the EU we're supposed to tell you that this site uses cookies, so there's that.
