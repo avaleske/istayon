@@ -30,21 +30,27 @@
         margin-left: auto ;
         margin-right: auto ;
         margin-top: 5%;
-        width:383px;
-        height:175px;
         display: inline-block;
-        background-color: #BEBEBE;
-        background-image: linear-gradient(
-          rgba(128, 128, 128, 0.45), 
-          rgba(128, 128, 128, 0.45)
-        ),
-        url('https://41.media.tumblr.com/6fe6c9367fb013923111b63b93532de7/tumblr_nxn5wkET8x1qdp9g4o1_1280.jpg');
-        background-size: 100% 100%;
+        {% if count == 19890 %}
+          width:380px;
+          height:380px;
+          background-color: #BEBEBE;
+          background-image: linear-gradient(
+            rgba(128, 128, 128, 0.45), 
+            rgba(128, 128, 128, 0.45)
+          ),
+          url('https://45.media.tumblr.com/3a230a8601b765ee12988f770af1f870/tumblr_ny5342Ne3W1qdp9g4o1_400.gif');
+          background-size: 100% 100%;
+        {% else %}
+          width:400px;
+          height:175px;
+        {% endif %}
 
     }
-    .axisLabels {font-size: 1.75em; color:#FFFFFF;}
+    .axisLabels {font-size: 1.75em; {% if count == 19890 %}color:#FFFFFF;{% endif %}}
     .axisLabels {padding-top: 0.5em}
-    .flot-tick-label {font-size: 1.75em; padding-right: 0.25em; padding-left: 0.25em; color:#FFFFFF;}
+    .flot-tick-label {font-size: 1.75em; padding-right: 0.25em; padding-left: 0.25em;
+      {% if count == 19890 %}color:#FFFFFF;{% endif %}}
     .flot-x-axis {margin-top: 0.5em; }
     .nowrap {white-space: nowrap;}
     .container {text-align: center; width:100%}
@@ -70,7 +76,9 @@
       #chart {
           display: inline-block;
           width: 90vw;
-          height: 41vw;
+          {% if count == 19890 %}
+            height: 90vw;
+          {% endif %}
       }
     }
     </style>
@@ -83,19 +91,19 @@
         <div id="details">
             <ul>
                 <li>{{ last_liked }}</li>
-                <li>She's liked {{ count|intcomma }} <a href="https://www.tumblr.com/liked/by/taylorswift" target="_blank">things</a>.</li>
+                <li>She's liked
+                {% if count != 19890 %}
+                  {{ count|intcomma }}
+                {% else %}
+                  19,89<span style="color:#A1A1A1;">0</span>  
+                {% endif %}
+                <a href="https://www.tumblr.com/liked/by/taylorswift" target="_blank">things</a>.</li>
                 <li>She was born in 1989.</li>
             </ul>
         </div>
     </div>
     <div id="chart"></div>
     <div id="announcement">
-    Hey Taylor, we could give you fifty reasons <br>
-    why we should be the ones you lurk.<br>
-    All those other blogs – well, they're beautiful <br>
-    but would they code a site for you? :P
-    <br><br>
-    In all seriousness, Taylor, thank you for keeping us Fearless for the last seven years.
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span> on the assist. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. Support us at <a href="https://www.patreon.com/imstillinbeta">Patreon</a> and we'll add your url to our <a href="/supporters">supporters page</a>. <span class="nowrap">Here are some <a href="/tos">guidelines</a> for using the site.</span> And if you're in the EU we're supposed to tell you that this site uses cookies, so there's that.
@@ -131,7 +139,7 @@
                               monotonicFit: true
                      }
                  },
-            colors: ['white']
+            colors: {% if count == 19890 %}['white']{% else %}['black']{% endif %}
         };
 
         var series1 = {

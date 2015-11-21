@@ -37,11 +37,11 @@ def index(request):
         elif (histogram[-1] > 0 and histogram[-2] > 0) or sum(histogram[-2:]) > 5:
             message = MESSAGE_FORMAT_STRING.format(phrases.get_yes(), phrases.get_name(), phrases.get_yes_end())
             context['title'] = "Yes! - IsTayOnTumblr?"
-        #offline
+        # offline
         elif sum(histogram[-2:]) == 0:
             message = MESSAGE_FORMAT_STRING.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
             context['title'] = "No - IsTayOnTumblr?"
-    #offline
+    # offline
     else:
         message = MESSAGE_FORMAT_STRING.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
         context['title'] = "No - IsTayOnTumblr?"
@@ -63,23 +63,7 @@ def index(request):
         context['xmin'] = start_unix
         context['xticks'] = json.dumps(xticks)
 
-    # some messages to celebrate the fearless anniversary
-    fearless_messages = [
-        "In this moment now screen-capture, it remember it.",
-        "You blog in class next to redhead named Abigail.",
-        "Follow me Juliet, you'll never have to be alone.",
-        "Cause I can't help it if you tag like an angel.",
-        "Now it's too late for you and your fanmail to come around.",
-        "Been here all along so why can't you see,\nJust reblog from me.",
-        "People are people, and sometimes we change our themes.",
-        "Anon could write a blog on how to ruin someone's perfect day.",
-        "I've been giving out reblogs every time and all you do is let me down.",
-        "But I miss replying and tagging and blogging in the rain,\nAnd it's 2am and I'm @ing your name.",
-        "Did I tag something way too honest make you run and hide?",
-        "I'm thirteen now\nAnd don't know how\nMy friends could post that meme.",
-        "Because Tumblr will change.\nCan you feel it now?\nThese walls that staff put up to hold us back will fall down."]
-
-    context['message'] = random.choice(fearless_messages)
+    context['message'] = message
     context['count'] = count
     # reduce specificity if it's been over six hours since she liked something.
     context['last_liked'] = u"It's been {0} since she liked something.".format(

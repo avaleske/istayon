@@ -61,7 +61,7 @@ names = {"Taylor Swift": 7,
          "Aunt Becky": 3,
          u"\U0001F385": 1,    # santa emoji
          u"\U0001F48C": 1,    # love letter emoji
-         u"\U000026C4": 5,    # snowman emoji
+         u"\U000026C4": 2,    # snowman emoji
          }
 
 yeses = {"Yep!": 4,
