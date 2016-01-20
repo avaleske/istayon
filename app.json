@@ -1,0 +1,43 @@
+{
+  "name": "istayon",
+  "scripts": {
+  },
+  "env": {
+    "GANALYTICS_TRACKING_CODE": {
+      "required": true
+    },
+    "HEROKU_APP_ID": {
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_RELEASE_VERSION": {
+      "required": true
+    },
+    "HEROKU_SLUG_COMMIT": {
+      "required": true
+    },
+    "HEROKU_SLUG_DESCRIPTION": {
+      "required": true
+    },
+    "NEW_RELIC_APP_NAME": {
+      "required": true
+    },
+    "SECRET_KEY": {
+      "required": true
+    },
+    "TUMBLR_API_KEY": {
+      "required": true
+    },
+    "TUMBLR_API_SECRET": {
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "memcachedcloud",
+    "papertrail",
+    "newrelic"
+  ]
+}
