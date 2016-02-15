@@ -21,8 +21,9 @@
     ul {list-style-type: none;}
 
     .avatar{vertical-align:middle; padding-left: 0.5em;}
-    .emoji{vertical-align: middle;}
+    .emoji{vertical-align: middle; height:1em;}
     #message{font-size: 4em;}
+    #message .emoji{height: 1.5em;}
     #details{font-size: 2em; margin-top: 5%;}
     #announcement{font-size: 1.5em; margin-top: 5%;}
     #footer{margin-top: 5%; margin-bottom: 5%; width: 70%; display: inline-block;}
@@ -86,12 +87,13 @@
                 <li>She's liked
                   {{ count|intcomma }}
                 <a href="https://www.tumblr.com/liked/by/taylorswift" target="_blank">things</a>.</li>
-                <li>She was born in 1989.</li>
+                <li>{{ "She won a Grammy today! :trophy:" | emoji_replace }}</li>
             </ul>
         </div>
     </div>
     <div id="chart"></div>
     <div id="announcement">
+    Congratulations Taylor! We're so proud of you. &lt;3
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span> on the assist. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. Support us at <a href="https://www.patreon.com/imstillinbeta">Patreon</a> and we'll add your url to our <a href="/supporters">supporters page</a>. <span class="nowrap">Here are some <a href="/tos">guidelines</a> for using the site.</span> And if you're in the EU we're supposed to tell you that this site uses cookies, so there's that.
