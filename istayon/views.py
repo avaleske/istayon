@@ -13,6 +13,10 @@ import random
 MESSAGE_FORMAT_STRING = u"{0} {1}{2}"
 TICK_INTERVAL_MINUTES = 15
 
+def aprilfools(request):
+    context = {}
+    return render(request, 'istayon/aprilfools.html', context)
+
 
 def index(request):
     log = logging.getLogger(__name__)
