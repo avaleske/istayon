@@ -34,18 +34,18 @@
         display: inline-block;
 
           width:400px;
-          height:266px;
-          background-color: #BEBEBE;
+          height:175px;
+          /*background-color: #BEBEBE;
           background-image:
-          url('http://36.media.tumblr.com/3a91d0e096a0d943f8756b1df7dcdec0/tumblr_o4yzv9aGZE1qdp9g4o1_500.png');
-          background-size: 100% 100%;
+          url('http://40.media.tumblr.com/2ecd81f61ef11cf4e3baa07b614938b8/tumblr_o074u5Imrr1rk3uipo1_1280.jpg');
+          background-size: 100% 100%*/;
 
 
     }
-    .axisLabels {font-size: 1.75em; color:#FFF;}
+    .axisLabels {font-size: 1.75em; color:#444;}
     .axisLabels {padding-top: 0.5em}
     .flot-tick-label {font-size: 1.75em; padding-right: 0.25em; padding-left: 0.25em;
-      color:#FFF;}
+      color:#444;}
     .flot-x-axis {margin-top: 0.5em; }
     .nowrap {white-space: nowrap;}
     .container {text-align: center; width:100%}
@@ -71,7 +71,7 @@
       #chart {
           display: inline-block;
           width: 90vw;
-          height: 60vw;
+          /*height: 47vw;*/
       }
     }
     </style>
@@ -93,8 +93,7 @@
     </div>
     <div id="chart"></div>
     <div id="announcement">
-      We are proud to announce our endorsement of <br>
-      <a class="tumblr_blog_link" href="http://timefordeborah.tumblr.com">timefordeborah</a> for #tumblrdecides!
+      {{ "Congratulations, Taylor &lt;3" | emoji_replace }}
     </div>
     <div id="footer">
         Built with love for the Taylor Swift community by <span class="nowrap"><a id="isib_link" href="http://imstillinbeta.tumblr.com"><img class="avatar" src="{{ isib }}"> imstillinbeta</a></span>, with <span class="nowrap"><a id="slohf_link" href="http://strangelookonhisface.tumblr.com"><img class="avatar" src="{{ slohf }}"> strangelookonhisface</a></span> on the assist. Code at <a href="https://github.com/avaleske/istayon">GitHub</a>. Support us at <a href="https://www.patreon.com/imstillinbeta">Patreon</a> and we'll add your url to our <a href="/supporters">supporters page</a>. <span class="nowrap">Here are some <a href="/tos">guidelines</a> for using the site.</span> And if you're in the EU we're supposed to tell you that this site uses cookies, so there's that.
@@ -130,7 +129,7 @@
                               monotonicFit: true
                      }
                  },
-            colors: ['white']
+            colors: ['black']
         };
 
         var series1 = {
@@ -165,12 +164,6 @@
         else {
 {#            create_link.setAttribute("href", "http://www.tumblr.com/share/link?url=" + encodeURIComponent(tumblr_link_url) + "&name=" + encodeURIComponent(tumblr_link_name) + "&description=" + encodeURIComponent(tumblr_link_description));#}
 {#            reblog_link.setAttribute("href", "http://imstillinbeta.tumblr.com/post/106189387107/istayontumblr")#}
-        }
-
-        if(/iP(ad|hone|od)/.test(navigator.userAgent)){
-            $(".tumblr_blog_link").each(function(){
-                $(this).attr('href', "tumblr://x-callback-url/blog?blogName=" + $(this).text());
-            });
         }
     </script>
     {% ganalytics %}
