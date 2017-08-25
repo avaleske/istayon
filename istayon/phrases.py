@@ -49,25 +49,26 @@ def get_weighted_option(phrase_dict):
             return phrase
 
 names = {"Taylor Swift": 7,
-         "Bae": 5,
+         # "Bae": 5,
          # "Mom": 5,
          "T-Swift": 3,
          "Taylor": 7,
          "Tay": 5,
          "Becky": 5,
-         "Tay Tay": 2,
-         "T-Swizzle": 3,
-         "Shifty Swifty": 3,
-         "Aunt Becky": 3,
+         # "Tay Tay": 2,
+         # "T-Swizzle": 3,
+         # "Shifty Swifty": 3,
+         # "Aunt Becky": 3,
          u"\U0001F385": 1,    # santa emoji
-         u"\U0001F48C": 1,    # love letter emoji
-         u"\U000026C4": 1,    # snowman emoji
+         u"\U0001F40D": 3,    # snake emoji
+         # u"\U0001F48C": 1,    # love letter emoji
+         # u"\U000026C4": 1,    # snowman emoji
          }
 
 yeses = {"Yep!": 4,
          "Yep,": 5,
          "YAAS,": 3,
-         "Everything's shiny, Cap'n,": 1,
+         # "Everything's shiny, Cap'n,": 1,
          "Yes!": 3,
          "Yes,": 5
          }
@@ -84,22 +85,23 @@ nos = {"No,": 6,
 yes_ends = {" is online.": 4,
             " is liking stuff!": 3,
             "'s online.": 4,
-            " is out of her cabinet!": 1
+            # " is out of her cabinet!": 1
             }
 
 no_ends = {" isn't online.": 5,
            " hasn't liked anything in awhile.": 5,
+           " can't come to the phone right now.": 5,
            " isn't online right now.": 4,
-           " is probably hiding in her cabinet.": 1,
-           " must be off mom-crooning to Britney Spears.": 1,
-           " is likely home making caramel delight.": 1,
-           " isn't on. Meerkat Manor must not have wifi.": 1,
+           # " is probably hiding in her cabinet.": 1,
+           # " must be off mom-crooning to Britney Spears.": 1,
+           # " is likely home making caramel delight.": 1,
+           # " isn't on. Meerkat Manor must not have wifi.": 1,
            " isn't online, but she found herself and somehow that was everything.": 2,
            " isn't on, but she might be looking for that All Too Well CD so...": 2,
            }
 
 maybe_up_ends = {" might be here. She just liked a few things.": 6,
-                 " just liked a few things...": 3
+                 " just liked a few things!": 3
                  }
 
 maybe_down_ends = {" might still be online?": 6,
