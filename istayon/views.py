@@ -28,19 +28,19 @@ def index(request):
         # ramp up
         if histogram[-1] > 0 and histogram[-2] == 0:
             message = MESSAGE_FORMAT_STRING.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_up_end())
-            context['title'] = "Maybe - IsTayOnTumblr?"
+            context['title'] = "IsTayOnTumblr?"
         # ramp down
         elif histogram[-1] == 0 and histogram[-2] > 0:
             message = MESSAGE_FORMAT_STRING.format(phrases.get_maybe(), phrases.get_name(), phrases.get_maybe_down_end())
-            context['title'] = "Maybe - IsTayOnTumblr?"
+            context['title'] = "IsTayOnTumblr?"
         # online
         elif (histogram[-1] > 0 and histogram[-2] > 0) or sum(histogram[-2:]) > 5:
             message = MESSAGE_FORMAT_STRING.format(phrases.get_yes(), phrases.get_name(), phrases.get_yes_end())
-            context['title'] = "Yes! - IsTayOnTumblr?"
+            context['title'] = "IsTayOnTumblr?"
         # offline
         elif sum(histogram[-2:]) == 0:
             message = MESSAGE_FORMAT_STRING.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
-            context['title'] = "No - IsTayOnTumblr?"
+            context['title'] = "IsTayOnTumblr?"
     # offline
     else:
         message = MESSAGE_FORMAT_STRING.format(phrases.get_no(), phrases.get_name(), phrases.get_no_end())
