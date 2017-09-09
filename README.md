@@ -12,6 +12,8 @@ The UI needs a refactor pretty badly. I know a lot more about JS, CSS, Sass, Dja
 ##Setup##
 ###Install Prereqs###
 To run this locally you'll need a few things. (These instructions are for OS X. They're also from memory. I'll clean them up later, but some of you are playing with it now.)
+- First you need the Xcode command line tools. If you already have Xcode installed, install them with `xcode-select --install`
+- Install openssl with `brew install openssl`
 - You need to have Python, pip, and setuptools installed. Do it with the instructions [here](http://docs.python-guide.org/en/latest/starting/install/osx/).
 - Then use pip to install virtualenv and virtualenvwrapper with commands like `pip install <package name>`. Details about those can be found [here](https://github.com/kennethreitz/python-guide/blob/master/docs/dev/virtualenvs.rst). Basically, virtualenvs keep your python packages local to your projects.
 - Installing the [Heroku Toolbet](https://devcenter.heroku.com/articles/getting-started-with-python#set-up)) is the easiest way to install the heroku cli and the other tools you'll need.
@@ -25,7 +27,7 @@ To run this locally you'll need a few things. (These instructions are for OS X. 
 - Now you need to create a virtualenv. Do that with `mkvirtualenv istayon` assuming you got virtualenvwrapper installed.
 - Then activate the virtualenv with `workon istayon`. Now your python should point to the python in the virtualenv. You can confirm that with `which python`.
 - Install the required pip packages. From the same directory as the `requirements.txt` file, do 'pip install -r requirements.txt --allow-all-external'.
-- create a `.env` file in the root of the project. Heroku local sets the entries in the file as your environment variables, and `settings.py` checks environment variables for things like the API keys and database connection strings. This file is .gitignored so this sensitive stuff stays out of source control. If you deploy to Heroku, then you'll have to add these environment variable in the admin interface. We use the following entries for the local site:
+- create a `.env` file in the root of the project. Heroku local sets the entries in the file as your environment variables, and `settings.py` checks environment variables for things like the API keys and database connection strings. This file is .gitignored so this sensitive stuff stays out of source control. If you deploy to Heroku, then you'll have to add these environment variable in the admin interface. We use the following entries for the local site (Make sure to add your Tumblr API key):
 ```
 PYTHONUNBUFFERED=true
 DATABASE_URL=postgres://localhost/istayon
@@ -37,6 +39,7 @@ NEW_RELIC_APP_NAME=default1
 MEMCACHEDCLOUD_SERVERS=127.0.0.1:11211
 MEMCACHEDCLOUD_USERNAME=<this can be blank for local>
 MEMCACHEDCLOUD_PASSWORD=<you don't need this either>
+LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
 ```
 - Open the postgres console (should just be able to hit the elephant in your menu bar) and create a database called `istayon` with `CREATE DATABASE istayon`. You might have to make a user first? Try it, and check the PostgreSQL documentation if it doesn't work. (I'm writing this from memory.)
 - From the root of the project, run `foreman run ./manage.py syncdb` to setup the django databases. This might ask you to create a superuser. That's for the admin interface, which isn't currently used, but go ahead and make one if you want.
