@@ -99,8 +99,9 @@ def __get_avatar_url(blog_name, size=16):
     if not avatar:
         try:
             client = pytumblr.TumblrRestClient(settings.TUMBLR_API_KEY)
-            avatar = client.avatar(blog_name, size=size)['avatar_url']
-        except ServerNotFoundError:
+            response = client.avatar(blog_name, size=size);
+            avatar = response['avatar_url']
+        except (ServerNotFoundError, KeyError) as e:
             avatar = None
         swrcache.set(cache_key, avatar, 60 * 60)
     return avatar
