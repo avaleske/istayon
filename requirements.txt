@@ -1,4 +1,4 @@
-Django==1.7.1
+Django==1.11.23
 PyTumblr==0.0.6
 PyYAML==3.11
 dj-database-url==0.3.0
