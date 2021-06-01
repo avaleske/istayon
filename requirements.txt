@@ -19,5 +19,5 @@ python-binary-memcached==0.24.3
 pytz==2014.10
 static3==0.5.1
 trollius==1.0.4
-urllib3==1.7.1
+urllib3==1.26.5
 wsgiref==0.1.2
